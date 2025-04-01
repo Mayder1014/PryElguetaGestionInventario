@@ -34,7 +34,7 @@ namespace PryGestionDeInventario
                 comando.CommandType = CommandType.Text;
                 comando.CommandText = "SELECT * FROM Productos";
 
-                DataTable tablaEmpleados = new DataTable();
+                DataTable tablaProductos = new DataTable();
 
                 //foreach (DataRow fila in tablaEmpleados.Rows)
                 //{
@@ -42,9 +42,9 @@ namespace PryGestionDeInventario
                 //}
 
                 adaptador = new OleDbDataAdapter(comando);
-                adaptador.Fill(tablaEmpleados);
+                adaptador.Fill(tablaProductos);
 
-                dgvProductos.DataSource = tablaEmpleados;
+                dgvProductos.DataSource = tablaProductos;
             }
             catch (Exception ex)
             {

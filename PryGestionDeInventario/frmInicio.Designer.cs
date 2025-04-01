@@ -61,12 +61,6 @@
             this.lblCodigoEliminar = new System.Windows.Forms.Label();
             this.updCodigoE = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.updCodigoA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.updPrecioA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.updStockA)).BeginInit();
@@ -92,7 +86,7 @@
             // txtNombreA
             // 
             this.txtNombreA.Location = new System.Drawing.Point(296, 42);
-            this.txtNombreA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombreA.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreA.Name = "txtNombreA";
             this.txtNombreA.Size = new System.Drawing.Size(165, 22);
             this.txtNombreA.TabIndex = 1;
@@ -100,7 +94,7 @@
             // updCodigoA
             // 
             this.updCodigoA.Location = new System.Drawing.Point(85, 43);
-            this.updCodigoA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updCodigoA.Margin = new System.Windows.Forms.Padding(4);
             this.updCodigoA.Name = "updCodigoA";
             this.updCodigoA.Size = new System.Drawing.Size(69, 22);
             this.updCodigoA.TabIndex = 2;
@@ -108,7 +102,7 @@
             // updPrecioA
             // 
             this.updPrecioA.Location = new System.Drawing.Point(351, 90);
-            this.updPrecioA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updPrecioA.Margin = new System.Windows.Forms.Padding(4);
             this.updPrecioA.Name = "updPrecioA";
             this.updPrecioA.Size = new System.Drawing.Size(112, 22);
             this.updPrecioA.TabIndex = 3;
@@ -116,7 +110,7 @@
             // txtDescripcionA
             // 
             this.txtDescripcionA.Location = new System.Drawing.Point(104, 89);
-            this.txtDescripcionA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescripcionA.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescripcionA.Name = "txtDescripcionA";
             this.txtDescripcionA.Size = new System.Drawing.Size(171, 22);
             this.txtDescripcionA.TabIndex = 4;
@@ -124,7 +118,7 @@
             // updStockA
             // 
             this.updStockA.Location = new System.Drawing.Point(85, 133);
-            this.updStockA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updStockA.Margin = new System.Windows.Forms.Padding(4);
             this.updStockA.Name = "updStockA";
             this.updStockA.Size = new System.Drawing.Size(112, 22);
             this.updStockA.TabIndex = 6;
@@ -183,7 +177,7 @@
             // 
             this.cmbCategoriaA.FormattingEnabled = true;
             this.cmbCategoriaA.Location = new System.Drawing.Point(301, 132);
-            this.cmbCategoriaA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbCategoriaA.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCategoriaA.Name = "cmbCategoriaA";
             this.cmbCategoriaA.Size = new System.Drawing.Size(160, 24);
             this.cmbCategoriaA.TabIndex = 12;
@@ -191,15 +185,8 @@
             // dgvProductos
             // 
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
             this.dgvProductos.Location = new System.Drawing.Point(556, 15);
-            this.dgvProductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvProductos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersWidth = 51;
             this.dgvProductos.Size = new System.Drawing.Size(826, 618);
@@ -208,7 +195,7 @@
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(230, 226);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(100, 28);
             this.btnAgregar.TabIndex = 14;
@@ -219,7 +206,7 @@
             // btnEliminar
             // 
             this.btnEliminar.Location = new System.Drawing.Point(230, 600);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(100, 28);
             this.btnEliminar.TabIndex = 15;
@@ -230,7 +217,7 @@
             // btnModificar
             // 
             this.btnModificar.Location = new System.Drawing.Point(230, 466);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(100, 28);
             this.btnModificar.TabIndex = 16;
@@ -254,9 +241,9 @@
             this.mrcAgregar.Controls.Add(this.label4);
             this.mrcAgregar.Controls.Add(this.label5);
             this.mrcAgregar.Location = new System.Drawing.Point(37, 44);
-            this.mrcAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mrcAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.mrcAgregar.Name = "mrcAgregar";
-            this.mrcAgregar.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mrcAgregar.Padding = new System.Windows.Forms.Padding(4);
             this.mrcAgregar.Size = new System.Drawing.Size(477, 175);
             this.mrcAgregar.TabIndex = 19;
             this.mrcAgregar.TabStop = false;
@@ -278,9 +265,9 @@
             this.mrcModificar.Controls.Add(this.label12);
             this.mrcModificar.Controls.Add(this.label13);
             this.mrcModificar.Location = new System.Drawing.Point(37, 284);
-            this.mrcModificar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mrcModificar.Margin = new System.Windows.Forms.Padding(4);
             this.mrcModificar.Name = "mrcModificar";
-            this.mrcModificar.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mrcModificar.Padding = new System.Windows.Forms.Padding(4);
             this.mrcModificar.Size = new System.Drawing.Size(477, 175);
             this.mrcModificar.TabIndex = 20;
             this.mrcModificar.TabStop = false;
@@ -299,7 +286,7 @@
             // txtNombreM
             // 
             this.txtNombreM.Location = new System.Drawing.Point(296, 43);
-            this.txtNombreM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNombreM.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreM.Name = "txtNombreM";
             this.txtNombreM.Size = new System.Drawing.Size(165, 22);
             this.txtNombreM.TabIndex = 1;
@@ -307,7 +294,7 @@
             // updCodigoM
             // 
             this.updCodigoM.Location = new System.Drawing.Point(85, 43);
-            this.updCodigoM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updCodigoM.Margin = new System.Windows.Forms.Padding(4);
             this.updCodigoM.Name = "updCodigoM";
             this.updCodigoM.Size = new System.Drawing.Size(69, 22);
             this.updCodigoM.TabIndex = 2;
@@ -315,7 +302,7 @@
             // updPrecioM
             // 
             this.updPrecioM.Location = new System.Drawing.Point(351, 90);
-            this.updPrecioM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updPrecioM.Margin = new System.Windows.Forms.Padding(4);
             this.updPrecioM.Name = "updPrecioM";
             this.updPrecioM.Size = new System.Drawing.Size(112, 22);
             this.updPrecioM.TabIndex = 3;
@@ -323,7 +310,7 @@
             // txtDescripcionM
             // 
             this.txtDescripcionM.Location = new System.Drawing.Point(104, 89);
-            this.txtDescripcionM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDescripcionM.Margin = new System.Windows.Forms.Padding(4);
             this.txtDescripcionM.Name = "txtDescripcionM";
             this.txtDescripcionM.Size = new System.Drawing.Size(171, 22);
             this.txtDescripcionM.TabIndex = 4;
@@ -331,7 +318,7 @@
             // updStockM
             // 
             this.updStockM.Location = new System.Drawing.Point(85, 133);
-            this.updStockM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updStockM.Margin = new System.Windows.Forms.Padding(4);
             this.updStockM.Name = "updStockM";
             this.updStockM.Size = new System.Drawing.Size(112, 22);
             this.updStockM.TabIndex = 6;
@@ -350,7 +337,7 @@
             // 
             this.cmbCategoriaM.FormattingEnabled = true;
             this.cmbCategoriaM.Location = new System.Drawing.Point(301, 132);
-            this.cmbCategoriaM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbCategoriaM.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCategoriaM.Name = "cmbCategoriaM";
             this.cmbCategoriaM.Size = new System.Drawing.Size(160, 24);
             this.cmbCategoriaM.TabIndex = 12;
@@ -408,7 +395,7 @@
             // updCodigoE
             // 
             this.updCodigoE.Location = new System.Drawing.Point(264, 561);
-            this.updCodigoE.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.updCodigoE.Margin = new System.Windows.Forms.Padding(4);
             this.updCodigoE.Name = "updCodigoE";
             this.updCodigoE.Size = new System.Drawing.Size(93, 22);
             this.updCodigoE.TabIndex = 22;
@@ -424,47 +411,6 @@
             this.label14.TabIndex = 23;
             this.label14.Text = "Ingrese el codigo del producto para eliminarlo.";
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Codigo";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 60;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Nombre";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Descripcion";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Precio";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Stock";
-            this.Column5.MinimumWidth = 6;
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 80;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Categoria";
-            this.Column6.MinimumWidth = 6;
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 125;
-            // 
             // frmInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -479,7 +425,7 @@
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dgvProductos);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmInicio";
             this.Text = "Inicio";
             this.Load += new System.EventHandler(this.frmInicio_Load);
@@ -535,12 +481,6 @@
         private System.Windows.Forms.Label lblCodigoEliminar;
         private System.Windows.Forms.NumericUpDown updCodigoE;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
 
