@@ -122,25 +122,14 @@ namespace PryGestionDeInventario
 
                 DataTable tablaProductos = new DataTable();
 
-                //foreach (DataRow fila in tablaEmpleados.Rows)
-                //{
-
-                //}
-
                 adaptador = new OleDbDataAdapter(comando);
                 adaptador.Fill(tablaProductos);
 
                 foreach (DataRow fila in tablaProductos.Rows)
                 {
-                    /*string datos = fila[0].ToString() + ';' + fila[1].ToString() + ';' + fila[2].ToString() + ';' +
-                        fila[3].ToString() + ";" + fila[4].ToString() + ";" + fila[5].ToString();*/
-
                     clsProducto prod = new clsProducto(Convert.ToInt32(fila[0]), fila[1].ToString(), fila[2].ToString(),
                         Convert.ToDouble(fila[3]), Convert.ToInt32(fila[4]), fila[5].ToString()); ;
-                    /*
-                    clsProducto prod = new clsProducto(Convert.ToInt32(datos.Split(';')[0]), datos.Split(';')[1], datos.Split(';')[2],
-                        Convert.ToDouble(datos.Split(';')[3]), Convert.ToInt32(datos.Split(';')[4]), datos.Split(';')[5]);
-                    */
+
                     lista.lstProductos.Add(prod);
                 }
             }
