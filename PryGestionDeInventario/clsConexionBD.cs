@@ -6,124 +6,85 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace PryGestionDeInventario
 {
     public class clsConexionBD
     {
-        // Definicion de comando, conexion y adaptador.
+        //cadena de conexion
+        string cadenaConexion = "Server=localhost;Database=Tienda;Trusted_Connection=True;";
 
-        OleDbCommand comando;
-        OleDbConnection conexion;
-        OleDbDataAdapter adaptador;
-        string cadena;
+        //conector
+        SqlConnection conexionBaseDatos;
 
-        public clsConexionBD()
-        {
-            cadena = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=./BBDDProductos.accdb;";
-        }
+        //comando
+        SqlCommand comandoBaseDatos;
 
-        public void obtenerDatos(DataGridView dgvProductos)
+        public string nombreBaseDeDatos;
+
+        public void ConectarBD()
         {
             try
             {
-                conexion = new OleDbConnection(cadena);
-                comando = new OleDbCommand();
+                conexionBaseDatos = new SqlConnection(cadenaConexion);
 
-                comando.Connection = conexion;
-                comando.CommandType = CommandType.Text;
-                comando.CommandText = "SELECT * FROM Productos";
+                nombreBaseDeDatos = conexionBaseDatos.Database;
 
+                conexionBaseDatos.Open();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Tiene un errorcito - " + error.Message);
+            }
+        }
+
+        public void obtenerDatos(DataGridView dgv)
+        {
+            try
+            {
+                ConectarBD();
+
+                string query = "SELECT * FROM Productos";
+                comandoBaseDatos = new SqlCommand(query, conexionBaseDatos);
+
+                //Crear un DataTable
                 DataTable tablaProductos = new DataTable();
 
-                //foreach (DataRow fila in tablaEmpleados.Rows)
-                //{
-
-                //}
-
-                adaptador = new OleDbDataAdapter(comando);
-                adaptador.Fill(tablaProductos);
-
-                dgvProductos.DataSource = tablaProductos;
+                //Llenar el DataTable
+                using (SqlDataReader reader = comandoBaseDatos.ExecuteReader())
+                {
+                    tablaProductos.Load(reader);
+                }
+                //Mostrar en grilla
+                dgv.DataSource = tablaProductos;
             }
-            catch (Exception ex)
+            catch (Exception error)
             {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public void agregarProducto(clsProducto producto)
-        {
-            try
-            {
-                conexion = new OleDbConnection(cadena);
-                comando = new OleDbCommand();
-
-                comando.Connection = conexion;
-                comando.CommandType = CommandType.Text;
-                comando.CommandText = $"INSERT INTO Productos(Codigo, Nombre, Descripcion, Precio, Stock, Categoria) VALUES" +
-                    $"('{producto.codigo}', '{producto.nombre}', '{producto.descripcion}', '{producto.precio}'," +
-                    $"'{producto.stock}','{producto.categoria}')";
-
-                conexion.Open();
-
-                comando.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Tiene un errorcito - " + error.Message);
             }
             finally
             {
-                conexion.Close();
+                conexionBaseDatos.Close();
             }
         }
-
-        
-        public void actualizarProducto(clsProducto producto)
-        {
-            try
-            {
-                conexion = new OleDbConnection(cadena);
-                comando = new OleDbCommand();
-
-                comando.Connection = conexion;
-                comando.CommandType = CommandType.Text;
-                comando.CommandText = $"UPDATE Productos SET Nombre='{producto.nombre}', Descripcion='{producto.descripcion}', " +
-                    $"Precio='{producto.precio}', Stock='{producto.stock}', Categoria='{producto.categoria}' WHERE Codigo = {producto.codigo}";
-
-                conexion.Open();
-
-                comando.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conexion.Close();
-            }
-        }
-        
 
         public void cargarLista(clsProductos lista)
         {
             try
             {
-                conexion = new OleDbConnection(cadena);
-                comando = new OleDbCommand();
+                ConectarBD();
+                string query = "SELECT * FROM Productos";
+                comandoBaseDatos = new SqlCommand(query, conexionBaseDatos);
 
-                comando.Connection = conexion;
-                comando.CommandType = CommandType.Text;
-                comando.CommandText = "SELECT * FROM Productos";
-
+                //Crear un DataTable
                 DataTable tablaProductos = new DataTable();
 
-                adaptador = new OleDbDataAdapter(comando);
-                adaptador.Fill(tablaProductos);
+                //Llenar el DataTable
+                using (SqlDataReader reader = comandoBaseDatos.ExecuteReader())
+                {
+                    tablaProductos.Load(reader);
+                }
 
                 foreach (DataRow fila in tablaProductos.Rows)
                 {
@@ -138,5 +99,88 @@ namespace PryGestionDeInventario
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void agregarProducto(clsProducto producto)
+        {
+            try
+            {
+                ConectarBD();
+
+                string insertQuery = "INSERT INTO Productos (Codigo, Nombre, Descripcion, Precio, Stock, Categoria) VALUES " +
+                    "(@codigo, @nombre, @descripcion, @precio, @stock, @categoria)";
+                SqlCommand cmd = new SqlCommand(insertQuery, conexionBaseDatos);
+
+                cmd.Parameters.AddWithValue("@codigo", producto.codigo);
+                cmd.Parameters.AddWithValue("@nombre", producto.nombre);
+                cmd.Parameters.AddWithValue("@descripcion", producto.descripcion);
+                cmd.Parameters.AddWithValue("@precio", producto.precio);
+                cmd.Parameters.AddWithValue("@stock", producto.stock);
+                cmd.Parameters.AddWithValue("@categoria", producto.categoria);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexionBaseDatos.Close();
+            }
+        }
+
+        public void actualizarProducto(clsProducto producto)
+        {
+            try
+            {
+                ConectarBD();
+
+                string updateQuery = "UPDATE Productos SET Nombre = @nombre, Descripcion = @descripcion, " +
+                    "Precio = @precio, Stock = @stock, Categoria = @categoria WHERE Codigo = @codigo";
+                SqlCommand cmd = new SqlCommand(updateQuery, conexionBaseDatos);
+
+                cmd.Parameters.AddWithValue("@codigo", producto.codigo);
+                cmd.Parameters.AddWithValue("@nombre", producto.nombre);
+                cmd.Parameters.AddWithValue("@descripcion", producto.descripcion);
+                cmd.Parameters.AddWithValue("@precio", producto.precio);
+                cmd.Parameters.AddWithValue("@stock", producto.stock);
+                cmd.Parameters.AddWithValue("@categoria", producto.categoria);
+
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexionBaseDatos.Close();
+            }
+        }
+
+        public void eliminarProducto(int codEliminar)
+        {
+            try
+            {
+                ConectarBD();
+
+                string deleteQuery = "DELETE FROM Productos WHERE Codigo = @codigo";
+                SqlCommand cmd = new SqlCommand(deleteQuery, conexionBaseDatos);
+
+                cmd.Parameters.AddWithValue("@codigo", codEliminar);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conexionBaseDatos.Close();
+            }
+        }
+
     }
 }

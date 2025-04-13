@@ -18,7 +18,8 @@ namespace PryGestionDeInventario
             InitializeComponent();
         }
 
-        clsConexionBD conn = new clsConexionBD();
+        clsConexionBDAccess conn = new clsConexionBDAccess();
+        clsConexionBD conexion = new clsConexionBD();
         clsProductos lstProductos = new clsProductos();
 
         private void frmInicio_Load(object sender, EventArgs e)
@@ -35,8 +36,8 @@ namespace PryGestionDeInventario
             updStockA.Minimum = 1; updStockA.Maximum = 1000;
             updStockM.Maximum = 1000;
 
-            conn.cargarLista(lstProductos);
-            conn.obtenerDatos(dgvProductos);
+            conexion.cargarLista(lstProductos);  // Con Access -----> conn.cargarLista(lstProductos);
+            conexion.obtenerDatos(dgvProductos); // Con Access -----> conn.obtenerDatos(dgvProductos);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -54,11 +55,11 @@ namespace PryGestionDeInventario
                     {
                         clsProducto nuevo = new clsProducto(cod, nom, desc, precio, stock, cat);
 
-                        conn.agregarProducto(nuevo); lstProductos.agregarProducto(nuevo);
-                        conn.obtenerDatos(dgvProductos);
+                        conexion.agregarProducto(nuevo); //Con Access-----> conn.agregarProducto(nuevo);
+                        lstProductos.agregarProducto(nuevo); conexion.obtenerDatos(dgvProductos);
 
                         restablecerValores(updCodigoA, txtNombreA, txtDescripcionA, updPrecioA, updStockA, cmbCategoriaA);
-                        MessageBox.Show("El producto fue añadido con exito.", "CARGA EXITOSA");
+                        MessageBox.Show("✅ El producto fue añadido con exito.", "CARGA EXITOSA");
                     }
                     else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR");
                 }
@@ -92,11 +93,12 @@ namespace PryGestionDeInventario
                         aux.nombre = nom; aux.descripcion = desc; aux.precio = precio;
                         aux.stock = stock; aux.categoria = cat;
 
-                        conn.actualizarProducto(aux); lstProductos.lstProductos.Clear();
-                        conn.obtenerDatos(dgvProductos); conn.cargarLista(lstProductos);
+                        conexion.actualizarProducto(aux); //Con Access ---> conn.actualizarProducto(aux);
+                        lstProductos.lstProductos.Clear();
+                        conexion.obtenerDatos(dgvProductos); conexion.cargarLista(lstProductos);
 
                         restablecerValores(updCodigoM, txtNombreM, txtDescripcionM, updPrecioM, updStockM, cmbCategoriaM);
-                        MessageBox.Show("El producto fue modificado con exito.", "MODIFICACIÓN EXITOSA");
+                        MessageBox.Show("🔄 El producto fue modificado con exito.", "MODIFICACIÓN EXITOSA");
                     }
                     else MessageBox.Show("El precio del producto debe valer más de 0.","ERROR");
                 }
@@ -106,7 +108,30 @@ namespace PryGestionDeInventario
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            int codEliminar = Convert.ToInt32(updCodigoE.Value);
+            string nomProducto = "";
+            bool existe = false;
 
+            lstProductos.lstProductos.ForEach(elem =>
+            {
+                if (codEliminar == elem.codigo)
+                {
+                    existe = true;
+                    nomProducto = elem.nombre;
+                }
+            });
+
+            if (existe != false)
+            {
+                conexion.eliminarProducto(codEliminar);
+
+                lstProductos.lstProductos.Clear();
+                conexion.obtenerDatos(dgvProductos); conexion.cargarLista(lstProductos);
+
+                updCodigoE.Value = 1;
+                MessageBox.Show($"❌ El producto ({nomProducto}) fue eliminado con exito.", "ELIMINACIÓN EXITOSA");
+            }
+            else MessageBox.Show("El producto que intenta eliminar NO existe en la Base de Datos (Codigo no encontrado).", "ERROR");
         }
 
         //METODOS -------------------------------------------------------------------------------------------
@@ -156,7 +181,7 @@ namespace PryGestionDeInventario
             nom.Text = "";
             desc.Text = "";
             precio.Value = 0;
-            stock.Value = 0;
+            stock.Value = 1;
             cat.SelectedIndex = -1;
         }
     }

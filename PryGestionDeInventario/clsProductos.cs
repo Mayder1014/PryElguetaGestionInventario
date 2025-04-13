@@ -9,7 +9,6 @@ namespace PryGestionDeInventario
     public class clsProductos
     {
         public List<clsProducto> lstProductos;
-        clsConexionBD conn = new clsConexionBD();
 
         public clsProductos()
         {
