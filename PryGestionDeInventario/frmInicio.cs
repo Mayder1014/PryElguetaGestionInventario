@@ -25,16 +25,19 @@ namespace PryGestionDeInventario
         private void frmInicio_Load(object sender, EventArgs e)
         {
             llenarCombo(cmbCategoriaA); llenarCombo(cmbCategoriaM);
-            var controles = new[] { updCodigoA, updCodigoM, updCodigoE };
+            /*
+            var controles = new[] { updCodigoA, updCodigoE, updCodigoM};
 
             foreach (var c in controles)
             {
                 c.Minimum = 1;
                 c.Maximum = 100;
-            }
+            }*/
+            updCodigoA.Maximum = 100; updCodigoE.Maximum = 100; updCodigoE.Minimum = 1;
 
-            updStockA.Minimum = 1; updStockA.Maximum = 1000;
-            updStockM.Maximum = 1000;
+            updStockA.Maximum = 1000; updStockM.Maximum = 1000;
+            updPrecioA.Maximum = 10000; updPrecioM.Maximum = 10000;
+            dgvProductos.ReadOnly = true;
 
             conexion.cargarLista(lstProductos);  // Con Access -----> conn.cargarLista(lstProductos);
             conexion.obtenerDatos(dgvProductos); // Con Access -----> conn.obtenerDatos(dgvProductos);
@@ -42,28 +45,32 @@ namespace PryGestionDeInventario
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (camposVacios(txtNombreA, txtDescripcionA, cmbCategoriaA) != true) //Verificamos que no hayan campos vacios
+            if (updCodigoA.Value != 0)
             {
-                int cod = Convert.ToInt32(updCodigoA.Value); int stock = Convert.ToInt32(updStockA.Value);
-                string nom = txtNombreA.Text; string desc = txtDescripcionA.Text;
-                double precio = Convert.ToDouble(updPrecioA.Value);
-                string cat = cmbCategoriaA.Text;
-
-                if (codRepetido(cod) != true) //Verificamos que el codigo no exista en la base de datos/lista
+                if (camposVacios(txtNombreA, txtDescripcionA, cmbCategoriaA) != true) //Verificamos que no hayan campos vacios
                 {
-                    if (precio > 0) //Verificamos que el producto no sea gratis viste
+                    int cod = Convert.ToInt32(updCodigoA.Value); int stock = Convert.ToInt32(updStockA.Value);
+                    string nom = txtNombreA.Text; string desc = txtDescripcionA.Text;
+                    double precio = Convert.ToDouble(updPrecioA.Value);
+                    string cat = cmbCategoriaA.Text;
+
+                    if (codRepetido(cod) != true) //Verificamos que el codigo no exista en la base de datos/lista
                     {
-                        clsProducto nuevo = new clsProducto(cod, nom, desc, precio, stock, cat);
+                        if (precio > 0) //Verificamos que el producto no sea gratis viste
+                        {
+                            clsProducto nuevo = new clsProducto(cod, nom, desc, precio, stock, cat);
 
-                        conexion.agregarProducto(nuevo); //Con Access-----> conn.agregarProducto(nuevo);
-                        lstProductos.agregarProducto(nuevo); conexion.obtenerDatos(dgvProductos);
+                            conexion.agregarProducto(nuevo); //Con Access-----> conn.agregarProducto(nuevo);
+                            lstProductos.agregarProducto(nuevo); conexion.obtenerDatos(dgvProductos);
 
-                        restablecerValores(updCodigoA, txtNombreA, txtDescripcionA, updPrecioA, updStockA, cmbCategoriaA);
-                        MessageBox.Show("✅ El producto fue añadido con exito.", "CARGA EXITOSA");
+                            restablecerValores(updCodigoA, txtNombreA, txtDescripcionA, updPrecioA, updStockA, cmbCategoriaA);
+                            MessageBox.Show("✅ El producto fue añadido con exito.", "CARGA EXITOSA");
+                        }
+                        else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR");
                     }
-                    else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR");
                 }
             }
+            else MessageBox.Show("El codigo del producto NO puede ser 0.","ERROR");
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -100,9 +107,9 @@ namespace PryGestionDeInventario
                         restablecerValores(updCodigoM, txtNombreM, txtDescripcionM, updPrecioM, updStockM, cmbCategoriaM);
                         MessageBox.Show("🔄 El producto fue modificado con exito.", "MODIFICACIÓN EXITOSA");
                     }
-                    else MessageBox.Show("El precio del producto debe valer más de 0.","ERROR");
+                    else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR");
                 }
-                else MessageBox.Show("El producto que intenta modiicar no se encuentra en la Base de Datos (El codigo no existe).","ERROR");
+                else MessageBox.Show("El producto que intenta modiicar no se encuentra en la Base de Datos (El codigo no existe).", "ERROR");
             }
         }
 
@@ -146,7 +153,7 @@ namespace PryGestionDeInventario
             }
         }
 
-        public bool codRepetido (int cod)
+        public bool codRepetido(int cod)
         {
             bool respuesta = false;
 
@@ -155,21 +162,21 @@ namespace PryGestionDeInventario
                 if (cod == elem.codigo)
                 {
                     respuesta = true;
-                    MessageBox.Show("El codigo que intenta ingresar ya fue asignado a otro producto.","ERROR");
+                    MessageBox.Show("El codigo que intenta ingresar ya fue asignado a otro producto.", "ERROR");
                 }
             });
 
             return respuesta;
         }
 
-        public bool camposVacios (TextBox nom, TextBox desc, ComboBox cat)
+        public bool camposVacios(TextBox nom, TextBox desc, ComboBox cat)
         {
             bool respuesta = false;
 
             if (nom.Text == "" || desc.Text == "" || cat.SelectedIndex == -1)
             {
                 respuesta = true;
-                MessageBox.Show("Hay campos sin completar.","ERROR");
+                MessageBox.Show("Hay campos sin completar.", "ERROR");
             }
 
             return respuesta;
@@ -177,12 +184,101 @@ namespace PryGestionDeInventario
 
         public void restablecerValores(NumericUpDown cod, TextBox nom, TextBox desc, NumericUpDown precio, NumericUpDown stock, ComboBox cat)
         {
-            cod.Value = 1;
+            cod.Value = 0;
             nom.Text = "";
             desc.Text = "";
             precio.Value = 0;
-            stock.Value = 1;
+            stock.Value = 0;
             cat.SelectedIndex = -1;
         }
+
+        private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verificar que el click no sea en el encabezado
+            if (e.RowIndex >= 0)
+            {
+                // Obtener la fila seleccionada
+                DataGridViewRow filaSeleccionada = dgvProductos.Rows[e.RowIndex];
+
+                //filaSeleccionada.Cells[0] ----> Debería de agarrar la columna donde DEBE estar el codigo del producto.
+
+                //Verificamos que la fila seleccionada no este vacia (Como lo sería en el caso de la última).
+                if (!string.IsNullOrWhiteSpace(filaSeleccionada.Cells[0].Value.ToString()))
+                {
+                    // Crear un array con la cantidad de celdas que tiene la fila / Crear variable de indice
+                    string[] vecDatos = new string[filaSeleccionada.Cells.Count]; int i = 0;
+
+                    // Recorrer cada celda y guardar su valor en el array
+                    foreach (DataGridViewCell celda in filaSeleccionada.Cells)
+                    {
+                        vecDatos[i] = celda.Value.ToString();
+                        i++;
+                    }
+
+                    updCodigoM.Value = Convert.ToDecimal(vecDatos[0]); txtNombreM.Text = vecDatos[1];
+                    txtDescripcionM.Text = vecDatos[2]; updPrecioM.Value = Convert.ToDecimal(vecDatos[3]);
+                    updStockM.Value = Convert.ToDecimal(vecDatos[4]);
+
+                    int indice = cmbCategoriaM.FindStringExact(vecDatos[5]); //<--- Devuelve el indice según el string dado por parametro.
+                    cmbCategoriaM.SelectedIndex = indice;
+                }
+                else
+                {
+                    MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para modificar.", "ERROR AL OBTENER DATOS");
+                    restablecerValores(updCodigoM, txtNombreM, txtDescripcionM, updPrecioM, updStockM, cmbCategoriaM);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para modificar.","ERROR AL OBTENER DATOS");
+            }
+
+        }
+
+        public void habilitarBotonModificar()
+        {
+            if (updCodigoM.Value != 0 && txtNombreM.Text != "" && txtDescripcionM.Text != "" && updPrecioM.Value != 0 &&
+                updStockM.Value != 0 && cmbCategoriaM.SelectedIndex != -1)
+            {
+                btnModificar.Enabled = true;
+            } else btnModificar.Enabled = false;
+        }
+
+        private void updCodigoM_ValueChanged(object sender, EventArgs e)
+        {
+            habilitarBotonModificar();
+        }
+
+        private void txtNombreM_TextChanged(object sender, EventArgs e)
+        {
+            habilitarBotonModificar();
+        }
+
+        private void txtDescripcionM_TextChanged(object sender, EventArgs e)
+        {
+            habilitarBotonModificar();
+        }
+
+        private void updPrecioM_ValueChanged(object sender, EventArgs e)
+        {
+            habilitarBotonModificar();
+        }
+
+        private void updStockM_ValueChanged(object sender, EventArgs e)
+        {
+            habilitarBotonModificar();
+        }
+
+        private void cmbCategoriaM_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            habilitarBotonModificar();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            restablecerValores(updCodigoM, txtNombreM, txtDescripcionM, updPrecioM, updStockM, cmbCategoriaM);
+            habilitarBotonModificar();
+        }
+
     }
 }
