@@ -64,13 +64,13 @@ namespace PryGestionDeInventario
                             lstProductos.agregarProducto(nuevo); conexion.obtenerDatos(dgvProductos);
 
                             restablecerValores(updCodigoA, txtNombreA, txtDescripcionA, updPrecioA, updStockA, cmbCategoriaA);
-                            MessageBox.Show("✅ El producto fue añadido con exito.", "CARGA EXITOSA");
+                            MessageBox.Show("El producto fue añadido con exito.", "✅ CARGA EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR");
+                        else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-            else MessageBox.Show("El codigo del producto NO puede ser 0.","ERROR");
+            else MessageBox.Show("El codigo del producto NO puede ser 0.","ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -105,11 +105,11 @@ namespace PryGestionDeInventario
                         conexion.obtenerDatos(dgvProductos); conexion.cargarLista(lstProductos);
 
                         restablecerValores(updCodigoM, txtNombreM, txtDescripcionM, updPrecioM, updStockM, cmbCategoriaM);
-                        MessageBox.Show("🔄 El producto fue modificado con exito.", "MODIFICACIÓN EXITOSA");
+                        MessageBox.Show("El producto fue modificado con exito.", "🔄 MODIFICACIÓN EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR");
+                    else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else MessageBox.Show("El producto que intenta modiicar no se encuentra en la Base de Datos (El codigo no existe).", "ERROR");
+                else MessageBox.Show("El producto que intenta modiicar no se encuentra en la Base de Datos (El codigo no existe).", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -119,6 +119,7 @@ namespace PryGestionDeInventario
             string nomProducto = "";
             bool existe = false;
 
+            //Busqueda del producto
             lstProductos.lstProductos.ForEach(elem =>
             {
                 if (codEliminar == elem.codigo)
@@ -130,15 +131,35 @@ namespace PryGestionDeInventario
 
             if (existe != false)
             {
-                conexion.eliminarProducto(codEliminar);
+                DialogResult respuesta = MessageBox.Show($"¿Está seguro que desea eliminar el producto '{nomProducto}' (Código: {codEliminar})?",
+                    "CONFIRMAR ELIMINACIÓN",
+                        MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning,
+                                MessageBoxDefaultButton.Button2); // No como opción por defecto
 
-                lstProductos.lstProductos.Clear();
-                conexion.obtenerDatos(dgvProductos); conexion.cargarLista(lstProductos);
+                if (respuesta == DialogResult.Yes)
+                {
+                    conexion.eliminarProducto(codEliminar);
 
-                updCodigoE.Value = 1;
-                MessageBox.Show($"❌ El producto ({nomProducto}) fue eliminado con exito.", "ELIMINACIÓN EXITOSA");
+                    lstProductos.lstProductos.Clear();
+                    conexion.obtenerDatos(dgvProductos); conexion.cargarLista(lstProductos);
+
+                    updCodigoE.Value = 1;
+                    MessageBox.Show($"El producto ({nomProducto}) fue eliminado con exito.", "❌ ELIMINACIÓN EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            else MessageBox.Show("El producto que intenta eliminar NO existe en la Base de Datos (Codigo no encontrado).", "ERROR");
+            else MessageBox.Show("El producto que intenta eliminar NO existe en la Base de Datos (Codigo no encontrado).", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void btnLimpiarA_Click(object sender, EventArgs e)
+        {
+            restablecerValores(updCodigoA, txtNombreA, txtDescripcionA, updPrecioA, updStockA, cmbCategoriaA);
+        }
+
+        private void btnLimpiarM_Click(object sender, EventArgs e)
+        {
+            restablecerValores(updCodigoM, txtNombreM, txtDescripcionM, updPrecioM, updStockM, cmbCategoriaM);
+            habilitarBotonModificar();
         }
 
         //METODOS -------------------------------------------------------------------------------------------
@@ -162,7 +183,7 @@ namespace PryGestionDeInventario
                 if (cod == elem.codigo)
                 {
                     respuesta = true;
-                    MessageBox.Show("El codigo que intenta ingresar ya fue asignado a otro producto.", "ERROR");
+                    MessageBox.Show("El codigo que intenta ingresar ya fue asignado a otro producto.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             });
 
@@ -176,7 +197,7 @@ namespace PryGestionDeInventario
             if (nom.Text == "" || desc.Text == "" || cat.SelectedIndex == -1)
             {
                 respuesta = true;
-                MessageBox.Show("Hay campos sin completar.", "ERROR");
+                MessageBox.Show("Hay campos sin completar.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return respuesta;
@@ -224,13 +245,13 @@ namespace PryGestionDeInventario
                 }
                 else
                 {
-                    MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para modificar.", "ERROR AL OBTENER DATOS");
+                    MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para modificar.", "ERROR AL OBTENER DATOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     restablecerValores(updCodigoM, txtNombreM, txtDescripcionM, updPrecioM, updStockM, cmbCategoriaM);
                 }
             }
             else
             {
-                MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para modificar.","ERROR AL OBTENER DATOS");
+                MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para modificar.","ERROR AL OBTENER DATOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
@@ -273,12 +294,5 @@ namespace PryGestionDeInventario
         {
             habilitarBotonModificar();
         }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            restablecerValores(updCodigoM, txtNombreM, txtDescripcionM, updPrecioM, updStockM, cmbCategoriaM);
-            habilitarBotonModificar();
-        }
-
     }
 }
