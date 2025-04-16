@@ -294,5 +294,6 @@ namespace PryGestionDeInventario
         {
             habilitarBotonModificar();
         }
+
     }
 }
