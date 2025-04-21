@@ -18,7 +18,7 @@ namespace PryGestionDeInventario
             InitializeComponent();
         }
 
-        clsConexionBDAccess conn = new clsConexionBDAccess();
+        //clsConexionBDAccess conn = new clsConexionBDAccess();
         clsConexionBD conexion = new clsConexionBD();
         clsProductos lstProductos = new clsProductos();
 
@@ -35,7 +35,7 @@ namespace PryGestionDeInventario
                 c.Maximum = 100;
             }*/
             updCodigo.Maximum = 100; //updCodigoE.Maximum = 100; updCodigoE.Minimum = 1;
-
+            updPrecio.DecimalPlaces = 2;
             updStock.Maximum = 1000; updPrecio.Maximum = 10000;
             dgvProductos.ReadOnly = true;
 
@@ -131,6 +131,7 @@ namespace PryGestionDeInventario
 
             if (existe != false)
             {
+                //Mensaje de advertencia / Confirmación para eliminar el producto.
                 DialogResult respuesta = MessageBox.Show($"¿Está seguro que desea eliminar el producto '{nomProducto}' (Código: {codEliminar})?",
                     "CONFIRMAR ELIMINACIÓN",
                         MessageBoxButtons.YesNo,
@@ -205,7 +206,7 @@ namespace PryGestionDeInventario
             txtDescripcion.Text = "";
             updPrecio.Value = 0;
             updStock.Value = 0;
-            cmbCategoria.SelectedIndex = -1;
+            cmbCategoria.SelectedIndex = -1; cmbCategoria.Text = "Seleccionar categoria...";
         }
 
         private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -345,6 +346,11 @@ namespace PryGestionDeInventario
             updCodigo.Enabled = true; //Se podra completar todos los campos para agregar un producto. Se habilita todo.
             txtNombre.Enabled = true; txtDescripcion.Enabled = true; cmbCategoria.Enabled = true;
             updPrecio.Enabled = true; updStock.Enabled = true;
+        }
+
+        private void cmbCategoria_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

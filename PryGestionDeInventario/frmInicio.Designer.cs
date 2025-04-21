@@ -170,12 +170,14 @@
             // 
             this.cmbCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCategoria.FormattingEnabled = true;
-            this.cmbCategoria.Location = new System.Drawing.Point(359, 141);
+            this.cmbCategoria.Location = new System.Drawing.Point(339, 141);
             this.cmbCategoria.Margin = new System.Windows.Forms.Padding(4);
             this.cmbCategoria.Name = "cmbCategoria";
-            this.cmbCategoria.Size = new System.Drawing.Size(160, 24);
+            this.cmbCategoria.Size = new System.Drawing.Size(180, 24);
             this.cmbCategoria.TabIndex = 4;
+            this.cmbCategoria.Text = "Seleccionar categoria...";
             this.cmbCategoria.SelectedIndexChanged += new System.EventHandler(this.cmbCategoriaM_SelectedIndexChanged);
+            this.cmbCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbCategoria_KeyPress);
             // 
             // label13
             // 
@@ -213,7 +215,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(286, 144);
+            this.label11.Location = new System.Drawing.Point(266, 144);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(69, 16);

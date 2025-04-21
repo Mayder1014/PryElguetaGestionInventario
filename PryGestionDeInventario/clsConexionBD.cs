@@ -56,6 +56,10 @@ namespace PryGestionDeInventario
                 {
                     tablaProductos.Load(reader);
                 }
+                //ESTO SE EJECUTARA SOLO UNA VEZ --> Apenas se carga el formulario, la grilla estará vacia. De aquí en adelante se sobreescribira constantemente ya teniendo datos.
+                if (dgv.Rows.Count == 0)
+                    MessageBox.Show("Conexión a base de datos: " + nombreBaseDeDatos);
+                
                 //Mostrar en grilla
                 dgv.DataSource = tablaProductos;
             }
