@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ReactiveUI;
 
 namespace PryGestionDeInventario
 {
@@ -57,6 +58,7 @@ namespace PryGestionDeInventario
 
                             restablecerValores();
                             MessageBox.Show("El producto fue añadido con exito.", "✅ CARGA EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtNombre.Focus();
                         }
                         else MessageBox.Show("El precio del producto debe valer más de 0.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -336,6 +338,21 @@ namespace PryGestionDeInventario
         private void cmbCategoria_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void mrcIngresarDatos_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
