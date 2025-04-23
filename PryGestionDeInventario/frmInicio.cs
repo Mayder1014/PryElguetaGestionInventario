@@ -18,29 +18,21 @@ namespace PryGestionDeInventario
             InitializeComponent();
         }
 
-        //clsConexionBDAccess conn = new clsConexionBDAccess();
         clsConexionBD conexion = new clsConexionBD();
         clsProductos lstProductos = new clsProductos();
 
         private void frmInicio_Load(object sender, EventArgs e)
         {
-            //llenarCombo(cmbCategoriaA); 
             llenarCombo(cmbCategoria);
-            /*
-            var controles = new[] { updCodigoA, updCodigoE, updCodigoM};
 
-            foreach (var c in controles)
-            {
-                c.Minimum = 1;
-                c.Maximum = 100;
-            }*/
             updCodigo.Maximum = 100; //updCodigoE.Maximum = 100; updCodigoE.Minimum = 1;
             updPrecio.DecimalPlaces = 2;
             updStock.Maximum = 1000; updPrecio.Maximum = 10000;
-            dgvProductos.ReadOnly = true;
 
-            conexion.cargarLista(lstProductos);  // Con Access -----> conn.cargarLista(lstProductos);
-            conexion.obtenerDatos(dgvProductos); // Con Access -----> conn.obtenerDatos(dgvProductos);
+            dgvProductos.ReadOnly = true;
+            conexion.cargarLista(lstProductos);
+            conexion.obtenerDatos(dgvProductos);
+            dgvProductos.ClearSelection();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -60,7 +52,7 @@ namespace PryGestionDeInventario
                         {
                             clsProducto nuevo = new clsProducto(cod, nom, desc, precio, stock, cat);
 
-                            conexion.agregarProducto(nuevo); //Con Access-----> conn.agregarProducto(nuevo);
+                            conexion.agregarProducto(nuevo);
                             lstProductos.agregarProducto(nuevo); conexion.obtenerDatos(dgvProductos);
 
                             restablecerValores();
@@ -100,7 +92,7 @@ namespace PryGestionDeInventario
                         aux.nombre = nom; aux.descripcion = desc; aux.precio = precio;
                         aux.stock = stock; aux.categoria = cat;
 
-                        conexion.actualizarProducto(aux); //Con Access ---> conn.actualizarProducto(aux);
+                        conexion.actualizarProducto(aux);
                         lstProductos.lstProductos.Clear();
                         conexion.obtenerDatos(dgvProductos); conexion.cargarLista(lstProductos);
 
@@ -136,7 +128,7 @@ namespace PryGestionDeInventario
                     "CONFIRMAR ELIMINACIÓN",
                         MessageBoxButtons.YesNo,
                             MessageBoxIcon.Warning,
-                                MessageBoxDefaultButton.Button2); // No como opción por defecto
+                                MessageBoxDefaultButton.Button2); //No como opción por defecto
 
                 if (respuesta == DialogResult.Yes)
                 {
@@ -186,6 +178,7 @@ namespace PryGestionDeInventario
             return respuesta;
         }
 
+        //Este metodo basicamente no se ejecuta, al ser que los botones se deshabilitan cuando hay campos vacios
         public bool camposVacios(TextBox nom, TextBox desc, ComboBox cat)
         {
             bool respuesta = false;
@@ -206,51 +199,40 @@ namespace PryGestionDeInventario
             txtDescripcion.Text = "";
             updPrecio.Value = 0;
             updStock.Value = 0;
-            cmbCategoria.SelectedIndex = -1; cmbCategoria.Text = "Seleccionar categoria...";
+            cmbCategoria.SelectedIndex = -1; cmbCategoria.Text = "Seleccionar categoría...";
         }
 
         private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Verificar que el botón seleccionado sea el de modificar
-            if (optModificar.Checked)
+            //Verificar que la opción seleccionada sea el de modificar o eliminar
+            if (optModificar.Checked || optEliminar.Checked)
             {
-                // Verificar que el click no sea en el encabezado
+                //Verificar que el click no sea en el encabezado (siendo RowIndex == -1 el encabezado)
                 if (e.RowIndex >= 0)
                 {
                     // Obtener la fila seleccionada
                     DataGridViewRow filaSeleccionada = dgvProductos.Rows[e.RowIndex];
 
-                    //filaSeleccionada.Cells[0] ----> Debería de agarrar la columna donde DEBE estar el codigo del producto.
+                    //Crear un vector con la cantidad de celdas que tiene la fila / Crear variable de indice
+                    string[] vecDatos = new string[filaSeleccionada.Cells.Count]; int i = 0;
 
-                    //Verificamos que la fila seleccionada no este vacia (Como lo sería en el caso de la última).
-                    if (!string.IsNullOrWhiteSpace(filaSeleccionada.Cells[0].Value.ToString()))
+                    //Recorrer cada celda de la fila y guardar su valor en el vector
+                    foreach (DataGridViewCell celda in filaSeleccionada.Cells)
                     {
-                        // Crear un array con la cantidad de celdas que tiene la fila / Crear variable de indice
-                        string[] vecDatos = new string[filaSeleccionada.Cells.Count]; int i = 0;
-
-                        // Recorrer cada celda y guardar su valor en el array
-                        foreach (DataGridViewCell celda in filaSeleccionada.Cells)
-                        {
-                            vecDatos[i] = celda.Value.ToString();
-                            i++;
-                        }
-
-                        updCodigo.Value = Convert.ToDecimal(vecDatos[0]); txtNombre.Text = vecDatos[1];
-                        txtDescripcion.Text = vecDatos[2]; updPrecio.Value = Convert.ToDecimal(vecDatos[3]);
-                        updStock.Value = Convert.ToDecimal(vecDatos[4]);
-
-                        int indice = cmbCategoria.FindStringExact(vecDatos[5]); //<--- Devuelve el indice según el string dado por parametro.
-                        cmbCategoria.SelectedIndex = indice;
+                        vecDatos[i] = celda.Value.ToString();
+                        i++;
                     }
-                    else
-                    {
-                        MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para modificar.", "ERROR AL OBTENER DATOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        restablecerValores();
-                    }
+
+                    updCodigo.Value = Convert.ToDecimal(vecDatos[0]); txtNombre.Text = vecDatos[1];
+                    txtDescripcion.Text = vecDatos[2]; updPrecio.Value = Convert.ToDecimal(vecDatos[3]);
+                    updStock.Value = Convert.ToDecimal(vecDatos[4]);
+
+                    int indice = cmbCategoria.FindStringExact(vecDatos[5]); //<--- Devuelve el indice del elemento del cmb que coincida con el string enviado por parametro.
+                    cmbCategoria.SelectedIndex = indice;
                 }
                 else
                 {
-                    MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para modificar.", "ERROR AL OBTENER DATOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para obtener los datos.", "ERROR AL OBTENER DATOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -319,13 +301,14 @@ namespace PryGestionDeInventario
 
         private void optEliminar_CheckedChanged(object sender, EventArgs e)
         {
-            lblAviso.Text = ">>  Para eliminar un producto, por favor ingresar solo  <<\r\nel codigo del producto a eliminar";
+            lblAviso.Text = ">>  Para eliminar un producto, por favor ingresar solo  <<\r\nel código del producto a eliminar";
             mrcIngresarDatos.BackColor = Color.IndianRed;
             restablecerValores();
             updCodigo.Minimum = 1; habilitarBotones();
             updCodigo.Enabled = true; //Solo se podra "elegir" el codigo para eliminar un producto.
             txtNombre.Enabled = false; txtDescripcion.Enabled = false; cmbCategoria.Enabled = false;
             updPrecio.Enabled = false; updStock.Enabled = false;
+            dgvProductos.ClearSelection();
         }
 
         private void optModificar_CheckedChanged(object sender, EventArgs e)
@@ -336,16 +319,18 @@ namespace PryGestionDeInventario
             updCodigo.Enabled = false; //Se podra modificar todos los campos menos el codigo del producto.
             txtNombre.Enabled = true; txtDescripcion.Enabled = true; cmbCategoria.Enabled = true;
             updPrecio.Enabled = true; updStock.Enabled = true;
+            dgvProductos.ClearSelection();
         }
 
         private void optAgregar_CheckedChanged(object sender, EventArgs e)
         {
-            lblAviso.Text = ">>  Para agregar un producto, completar los campos  <<\r\nNo puede repetir un mismo codigo";
+            lblAviso.Text = ">>  Para agregar un producto, completar los campos  <<\r\nNo puede repetir un mismo código";
             mrcIngresarDatos.BackColor = Color.MediumSpringGreen;
             restablecerValores(); habilitarBotones();
             updCodigo.Enabled = true; //Se podra completar todos los campos para agregar un producto. Se habilita todo.
             txtNombre.Enabled = true; txtDescripcion.Enabled = true; cmbCategoria.Enabled = true;
             updPrecio.Enabled = true; updStock.Enabled = true;
+            dgvProductos.ClearSelection();
         }
 
         private void cmbCategoria_KeyPress(object sender, KeyPressEventArgs e)

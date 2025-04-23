@@ -61,6 +61,7 @@
             // 
             // dgvProductos
             // 
+            this.dgvProductos.AllowUserToAddRows = false;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Location = new System.Drawing.Point(13, 310);
             this.dgvProductos.Margin = new System.Windows.Forms.Padding(4);
@@ -152,7 +153,7 @@
             this.lblAviso.Size = new System.Drawing.Size(421, 36);
             this.lblAviso.TabIndex = 13;
             this.lblAviso.Text = ">>  Para agregar un producto, completar los campos  <<\r\nNo puede repetir un mismo" +
-    " codigo";
+    " código";
             this.lblAviso.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label8
@@ -164,7 +165,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 16);
             this.label8.TabIndex = 0;
-            this.label8.Text = "Codigo:";
+            this.label8.Text = "Código:";
             // 
             // cmbCategoria
             // 
@@ -175,7 +176,7 @@
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(180, 24);
             this.cmbCategoria.TabIndex = 4;
-            this.cmbCategoria.Text = "Seleccionar categoria...";
+            this.cmbCategoria.Text = "Seleccionar categoría...";
             this.cmbCategoria.SelectedIndexChanged += new System.EventHandler(this.cmbCategoriaM_SelectedIndexChanged);
             this.cmbCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbCategoria_KeyPress);
             // 
@@ -220,7 +221,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(69, 16);
             this.label11.TabIndex = 11;
-            this.label11.Text = "Categoria:";
+            this.label11.Text = "Categoría:";
             // 
             // updCodigo
             // 
@@ -366,7 +367,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmInicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Inicio";
+            this.Text = "Gestion De Inventario";
             this.Load += new System.EventHandler(this.frmInicio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.mrcIngresarDatos.ResumeLayout(false);
