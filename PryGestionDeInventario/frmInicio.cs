@@ -24,6 +24,7 @@ namespace PryGestionDeInventario
 
         private void frmInicio_Load(object sender, EventArgs e)
         {
+            /*
             llenarCombo(cmbCategoria);
 
             updCodigo.Maximum = 100; //updCodigoE.Maximum = 100; updCodigoE.Minimum = 1;
@@ -34,8 +35,9 @@ namespace PryGestionDeInventario
             conexion.cargarLista(lstProductos);
             conexion.obtenerDatos(dgvProductos);
             dgvProductos.ClearSelection();
+            */
         }
-
+        /*
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (updCodigo.Value != 0)
@@ -151,6 +153,7 @@ namespace PryGestionDeInventario
             restablecerValores();
             habilitarBotones();
         }
+        
 
         //METODOS -------------------------------------------------------------------------------------------
         public void llenarCombo(ComboBox cmb)
@@ -351,6 +354,86 @@ namespace PryGestionDeInventario
         }
 
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        */
+
+        public void ocultarSubMenu()
+        {
+            if (panelSubMenu.Visible == true)
+            {
+                panelSubMenu.Visible = false;
+            }
+        }
+
+        public void mostrarSubMenu(Panel subMenu)
+        {
+            if (subMenu.Visible == false)
+            {
+                ocultarSubMenu();
+                subMenu.Visible = true;
+            }
+            else
+            {
+                subMenu.Visible = false;
+            }
+        }
+
+        private Form formActivo = null;
+        private void abrirFormulario(Form formulario)
+        {
+            if (formActivo != null) //Si exite un formulario activo, se cierra
+            {
+                formActivo.Close();
+            }
+            formActivo = formulario; //Se almacena el formulario activo
+            formulario.TopLevel = false; //Indica que el formulario no es de nivel superior
+            formulario.FormBorderStyle = FormBorderStyle.None;
+            formulario.Dock = DockStyle.Fill;
+            panelFormularios.Controls.Add(formulario);
+            panelFormularios.Tag = formulario; //Asocia el form con el panel "contenedor"
+            formulario.BringToFront();
+            formulario.Show();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGestionInventario_Click(object sender, EventArgs e)
+        {
+            mostrarSubMenu(panelSubMenu);
+        }
+
+        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            abrirFormulario(new frmAgregarProducto());
+
+            ocultarSubMenu();
+        }
+
+        private void btnModificarProducto_Click(object sender, EventArgs e)
+        {
+            abrirFormulario(new frmModificarProducto());
+
+            ocultarSubMenu();
+        }
+
+        private void btnEliminarProducto_Click(object sender, EventArgs e)
+        {
+            abrirFormulario(new frmEliminarProducto());
+
+            ocultarSubMenu();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void panelMenuLateral_Paint(object sender, PaintEventArgs e)
         {
 
         }
