@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ReactiveUI;
 
 namespace PryGestionDeInventario
 {
@@ -399,7 +398,7 @@ namespace PryGestionDeInventario
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-
+            conexion.ConectarBD();
         }
 
         private void btnGestionInventario_Click(object sender, EventArgs e)
@@ -433,9 +432,5 @@ namespace PryGestionDeInventario
             this.Close();
         }
 
-        private void panelMenuLateral_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

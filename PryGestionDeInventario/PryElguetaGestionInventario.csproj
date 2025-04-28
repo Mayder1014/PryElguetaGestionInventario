@@ -39,9 +39,6 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.2\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ReactiveUI, Version=20.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveUI.20.2.45\lib\net472\ReactiveUI.dll</HintPath>
-    </Reference>
     <Reference Include="Splat, Version=15.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.15.3.1\lib\netstandard2.0\Splat.dll</HintPath>
     </Reference>
@@ -165,12 +162,6 @@
     <None Include="Resources\logoIES21-removebg-preview.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\user.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\user %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\user %282%29.png" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoGithub.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

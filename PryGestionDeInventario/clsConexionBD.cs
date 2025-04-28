@@ -32,6 +32,8 @@ namespace PryGestionDeInventario
                 nombreBaseDeDatos = conexionBaseDatos.Database;
 
                 conexionBaseDatos.Open();
+
+                MessageBox.Show("Conexión a base de datos: " + nombreBaseDeDatos);
             }
             catch (Exception error)
             {
@@ -43,7 +45,11 @@ namespace PryGestionDeInventario
         {
             try
             {
-                ConectarBD();
+                conexionBaseDatos = new SqlConnection(cadenaConexion);
+
+                nombreBaseDeDatos = conexionBaseDatos.Database;
+
+                conexionBaseDatos.Open();
 
                 string query = "SELECT * FROM Productos";
                 comandoBaseDatos = new SqlCommand(query, conexionBaseDatos);
@@ -78,7 +84,12 @@ namespace PryGestionDeInventario
         {
             try
             {
-                ConectarBD();
+                conexionBaseDatos = new SqlConnection(cadenaConexion);
+
+                nombreBaseDeDatos = conexionBaseDatos.Database;
+
+                conexionBaseDatos.Open();
+
                 string query = "SELECT * FROM Productos";
                 comandoBaseDatos = new SqlCommand(query, conexionBaseDatos);
 
@@ -109,7 +120,11 @@ namespace PryGestionDeInventario
         {
             try
             {
-                ConectarBD();
+                conexionBaseDatos = new SqlConnection(cadenaConexion);
+
+                nombreBaseDeDatos = conexionBaseDatos.Database;
+
+                conexionBaseDatos.Open();
 
                 string insertQuery = "INSERT INTO Productos (Codigo, Nombre, Descripcion, Precio, Stock, Categoria) VALUES " +
                     "(@codigo, @nombre, @descripcion, @precio, @stock, @categoria)";
@@ -138,7 +153,11 @@ namespace PryGestionDeInventario
         {
             try
             {
-                ConectarBD();
+                conexionBaseDatos = new SqlConnection(cadenaConexion);
+
+                nombreBaseDeDatos = conexionBaseDatos.Database;
+
+                conexionBaseDatos.Open();
 
                 string updateQuery = "UPDATE Productos SET Nombre = @nombre, Descripcion = @descripcion, " +
                     "Precio = @precio, Stock = @stock, Categoria = @categoria WHERE Codigo = @codigo";
@@ -168,7 +187,11 @@ namespace PryGestionDeInventario
         {
             try
             {
-                ConectarBD();
+                conexionBaseDatos = new SqlConnection(cadenaConexion);
+
+                nombreBaseDeDatos = conexionBaseDatos.Database;
+
+                conexionBaseDatos.Open();
 
                 string deleteQuery = "DELETE FROM Productos WHERE Codigo = @codigo";
                 SqlCommand cmd = new SqlCommand(deleteQuery, conexionBaseDatos);

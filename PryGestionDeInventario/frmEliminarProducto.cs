@@ -129,7 +129,7 @@ namespace PryGestionDeInventario
 
         public void restablecerValores()
         {
-            updCodigo.Minimum = 0; updCodigo.Value = 0;
+            updCodigo.Value = 1;
             txtNombre.Text = "";
             txtDescripcion.Text = "";
             updPrecio.Value = 0;
