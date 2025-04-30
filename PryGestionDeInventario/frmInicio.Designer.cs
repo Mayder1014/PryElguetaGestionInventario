@@ -30,10 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInicio));
             this.panelMenuLateral = new System.Windows.Forms.Panel();
-            this.panelSubMenu = new System.Windows.Forms.Panel();
-            this.panelLogo = new System.Windows.Forms.Panel();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.panelSubMenu = new System.Windows.Forms.Panel();
+            this.panelLogo = new System.Windows.Forms.Panel();
             this.panelFormularios = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnSalir = new System.Windows.Forms.Button();
@@ -43,8 +43,8 @@
             this.btnGestionInventario = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.panelMenuLateral.SuspendLayout();
-            this.panelSubMenu.SuspendLayout();
             this.panelInfo.SuspendLayout();
+            this.panelSubMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,33 +59,10 @@
             this.panelMenuLateral.Controls.Add(this.panelLogo);
             this.panelMenuLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenuLateral.Location = new System.Drawing.Point(0, 0);
-            this.panelMenuLateral.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelMenuLateral.Margin = new System.Windows.Forms.Padding(2);
             this.panelMenuLateral.Name = "panelMenuLateral";
             this.panelMenuLateral.Size = new System.Drawing.Size(178, 606);
             this.panelMenuLateral.TabIndex = 0;
-            // 
-            // panelSubMenu
-            // 
-            this.panelSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(194)))), ((int)(((byte)(223)))));
-            this.panelSubMenu.Controls.Add(this.btnEliminarProducto);
-            this.panelSubMenu.Controls.Add(this.btnModificarProducto);
-            this.panelSubMenu.Controls.Add(this.btnAgregarProducto);
-            this.panelSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenu.Location = new System.Drawing.Point(0, 158);
-            this.panelSubMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.panelSubMenu.Name = "panelSubMenu";
-            this.panelSubMenu.Size = new System.Drawing.Size(178, 83);
-            this.panelSubMenu.TabIndex = 4;
-            this.panelSubMenu.Visible = false;
-            // 
-            // panelLogo
-            // 
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(178, 100);
-            this.panelLogo.TabIndex = 0;
             // 
             // panelInfo
             // 
@@ -101,12 +78,37 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
             this.linkLabel1.Location = new System.Drawing.Point(28, 99);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(118, 13);
             this.linkLabel1.TabIndex = 0;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Github del Programador";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // panelSubMenu
+            // 
+            this.panelSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(194)))), ((int)(((byte)(223)))));
+            this.panelSubMenu.Controls.Add(this.btnEliminarProducto);
+            this.panelSubMenu.Controls.Add(this.btnModificarProducto);
+            this.panelSubMenu.Controls.Add(this.btnAgregarProducto);
+            this.panelSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSubMenu.Location = new System.Drawing.Point(0, 158);
+            this.panelSubMenu.Margin = new System.Windows.Forms.Padding(2);
+            this.panelSubMenu.Name = "panelSubMenu";
+            this.panelSubMenu.Size = new System.Drawing.Size(178, 83);
+            this.panelSubMenu.TabIndex = 4;
+            this.panelSubMenu.Visible = false;
+            // 
+            // panelLogo
+            // 
+            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelLogo.Margin = new System.Windows.Forms.Padding(2);
+            this.panelLogo.Name = "panelLogo";
+            this.panelLogo.Size = new System.Drawing.Size(178, 100);
+            this.panelLogo.TabIndex = 0;
             // 
             // panelFormularios
             // 
@@ -121,6 +123,7 @@
             this.panelFormularios.Name = "panelFormularios";
             this.panelFormularios.Size = new System.Drawing.Size(702, 606);
             this.panelFormularios.TabIndex = 30;
+            this.panelFormularios.Paint += new System.Windows.Forms.PaintEventHandler(this.panelFormularios_Paint);
             // 
             // pictureBox1
             // 
@@ -260,9 +263,9 @@
             this.Text = "Inicio - Gestión De Inventario";
             this.Load += new System.EventHandler(this.frmInicio_Load);
             this.panelMenuLateral.ResumeLayout(false);
-            this.panelSubMenu.ResumeLayout(false);
             this.panelInfo.ResumeLayout(false);
             this.panelInfo.PerformLayout();
+            this.panelSubMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

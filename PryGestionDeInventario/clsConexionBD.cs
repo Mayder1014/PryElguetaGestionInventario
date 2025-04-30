@@ -41,6 +41,52 @@ namespace PryGestionDeInventario
             }
         }
 
+        public bool BuscarUsuario(string nombre, string contraseña)
+        {
+            bool usuarioValido = false;
+
+            try
+            {
+                using (conexionBaseDatos = new SqlConnection(cadenaConexion))
+                {
+                    conexionBaseDatos.Open();
+
+                    string query = "SELECT Contraseña FROM Usuarios WHERE Usuario = @Usuario AND Estado = 1";
+                    SqlCommand cmd = new SqlCommand(query, conexionBaseDatos);
+                    cmd.Parameters.AddWithValue("@Usuario", nombre);
+
+                    object resultado = cmd.ExecuteScalar();
+
+                    if (resultado != null)
+                    {
+                        string contraseñaBD = resultado.ToString();
+
+                        // Comparar contraseñas (si están cifradas, deberías usar un método como BCrypt o SHA256 aquí)
+                        if (contraseñaBD == contraseña) // ¡OJO! No recomendable si las contraseñas están en texto plano
+                        {
+                            usuarioValido = true;
+                            // Aquí también podrías actualizar la fecha de última conexión
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar usuario: " + ex.Message);
+            }
+
+            if (usuarioValido != true)
+            {
+                MessageBox.Show("Usuario o contraseña incorrectas.");
+            }
+            else
+            {
+                MessageBox.Show("Bienvenido " + nombre + ".");
+            }
+
+            return usuarioValido;
+        }
+
         public void obtenerDatos(DataGridView dgv)
         {
             try
