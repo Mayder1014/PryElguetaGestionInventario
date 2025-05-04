@@ -52,25 +52,55 @@ namespace PryGestionDeInventario
                 {
                     conexionBaseDatos.Open();
 
-                    // Consulta para obtener todos los datos necesarios del usuario
-                    string query = "SELECT Id, Usuario, Contraseña, Estado, FechaUltimaConexion FROM Usuarios WHERE Usuario = @Usuario AND Estado = 1";
+                    //Consulta para obtener todos los datos necesarios del usuario
+                    string query = "SELECT Id, Usuario, Contraseña, Estado, FechaUltimaConexion FROM Usuarios WHERE Usuario = @Usuario";
 
                     SqlCommand cmd = new SqlCommand(query, conexionBaseDatos);
                     cmd.Parameters.AddWithValue("@Usuario", nombre);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (reader.Read()) //Resultado: Busca al usuario, si se encuentra se procede con las siguientes operaciones.
                         {
-                            // Verificar contraseña (deberías usar hash en producción)
+                            //Se consigue la contraseña para comparar posteriormente.
                             string contraseñaBD = reader["Contraseña"].ToString();
 
-                            if (contraseñaBD == contraseña)
-                            {
-                                // Crear y devolver el objeto usuario con los datos
-                                return new clsUsuario(Convert.ToInt32(reader["Id"]), reader["Usuario"].ToString(), reader["Contraseña"].ToString(),
+                            //Crea un usuario auxiliar para verificar las condiciones del mismo (Bloqueado, si el usuario es correcto pero la contraseña no, etc)
+                            clsUsuario aux = new clsUsuario(Convert.ToInt32(reader["Id"]), reader["Usuario"].ToString(), reader["Contraseña"].ToString(),
                                     Convert.ToInt32(reader["Estado"]), Convert.ToDateTime(reader["FechaUltimaConexion"]));
+
+                            if (aux.estado != 0) //Resultado: El usuario no esta bloqueado, se procede con las siguientes operaciones.
+                            {
+                                if (contraseñaBD == contraseña) //Resultado: Se encuentra al usuario y se loguea -> intentos reseteados.
+                                {
+                                    frmLogin.intentosRestantes = 3; frmLogin.lblAviso.Visible = false;
+                                    return aux;
+                                }
+                                else //Resultado: Se encuentra al usuario pero la contraseña es incorrecta. Se le advierte de intentos y posible bloqueo
+                                {
+                                    frmLogin.intentosRestantes--; frmLogin.lblAviso.Visible = true;
+                                    frmLogin.lblAviso.Text = $"INTENTOS RESTANTES: {frmLogin.intentosRestantes}";
+
+                                    if (frmLogin.intentosRestantes > 0) //Resultado: Advertencia
+                                    {
+                                        MessageBox.Show("Contraseña incorrecta. Si agota sus intentos el usuario será bloqueado.", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                    else //Resultado: El usuario agoto sus intentos. Se procede a bloquearlo y notificarselo.
+                                    {
+                                        aux.estado = 0;
+                                        actualizarUsuario(aux);
+                                        MessageBox.Show("INTENTOS AGOTADOS. El usuario ha sido bloqueado.");
+                                    }
+                                }
+                            } 
+                            else //Resultado: El usuario ya se encuentra bloqueado. Se le notifica al usuario.
+                            {
+                                MessageBox.Show("El usuario se encuentra bloqueado.");
                             }
+                        }
+                        else //Resultado: No se encuentra / No existe el usuario
+                        {
+                            MessageBox.Show("Usuario no encontrado. Verifique que haya escrito correctamente.", "USUARIO INCORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -83,54 +113,6 @@ namespace PryGestionDeInventario
             return null; // Retorna null si no se encuentra o no coincide la contraseña
         }
 
-        /*
-        public bool BuscarUsuario(string nombre, string contraseña)
-        {
-            bool usuarioValido = false;
-
-            try
-            {
-                using (conexionBaseDatos = new SqlConnection(cadenaConexion))
-                {
-                    conexionBaseDatos.Open();
-
-                    string query = "SELECT Contraseña FROM Usuarios WHERE Usuario = @Usuario AND Estado = 1";
-                    SqlCommand cmd = new SqlCommand(query, conexionBaseDatos);
-                    cmd.Parameters.AddWithValue("@Usuario", nombre);
-
-                    object resultado = cmd.ExecuteScalar();
-
-                    if (resultado != null)
-                    {
-                        string contraseñaBD = resultado.ToString();
-
-                        // Comparar contraseñas (si están cifradas, deberías usar un método como BCrypt o SHA256 aquí)
-                        if (contraseñaBD == contraseña) // ¡OJO! No recomendable si las contraseñas están en texto plano
-                        {
-                            usuarioValido = true;
-                            // Aquí también podrías actualizar la fecha de última conexión
-                        }
-                        else
-                        {
-                            
-                            MessageBox.Show("Contraseña incorrecta.", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al buscar usuario: " + ex.Message);
-            }
-
-            if (usuarioValido != false)
-            {
-                MessageBox.Show("Bienvenido " + nombre + ".");
-            }
-
-            return usuarioValido;
-        }
-        */
         public void cargarUsuarios(List<clsUsuario> lstUsuarios)
         {
             try

@@ -59,3 +59,8 @@ CREATE TABLE Usuarios (
 INSERT INTO Usuarios (Usuario, Contraseña, Estado, FechaUltimaConexion)
 VALUES
 ('admin', 'admin', 1, GETDATE());
+
+-- En caso de necesitar desbloquear usuarios ---------------------------
+
+UPDATE Usuarios SET Estado = 1
+WHERE Id = X;

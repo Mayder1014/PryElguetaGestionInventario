@@ -19,6 +19,7 @@ namespace PryGestionDeInventario
 
         //Obtener referencia al frmInicio (Para modificar el panel contenedor de formularios)
         frmInicio formularioPrincipal = (frmInicio)Application.OpenForms["frmInicio"];
+        frmInventario formInventario = (frmInventario)Application.OpenForms["frmInventario"];
 
         private void frmOpciones_Load(object sender, EventArgs e)
         {

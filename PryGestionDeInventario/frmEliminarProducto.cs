@@ -22,7 +22,7 @@ namespace PryGestionDeInventario
 
         private void frmEliminarProducto_Load(object sender, EventArgs e)
         {
-            clsTemas.AplicarTema(this);
+            clsTemas.AplicarTema(this); clsTemas.AplicarTemaDgv(this);
 
             llenarCombo(cmbCategoria);
 

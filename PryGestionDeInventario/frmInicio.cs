@@ -20,13 +20,12 @@ namespace PryGestionDeInventario
         }
 
         static public bool logueado = false; //Variable que determinará cuando el usuario este logueado o no y pueda acceder a secciones del programa.
-        static public string estadoUsuario = "Invitado";
         public Panel panelContenedor;
 
         private void frmInicio_Load(object sender, EventArgs e)
         {
             clsTemas.AplicarTema(this);
-            mostrarEstadoUsuario();
+            mostrarEstadoUsuario(clsUsuario.usuarioActual);
             panelContenedor = panelFormularios; 
         }
 
@@ -135,9 +134,17 @@ namespace PryGestionDeInventario
         }
 
         
-        public void mostrarEstadoUsuario()
+        public void mostrarEstadoUsuario(clsUsuario usuario)
         {
-            lblEstadoUsuario.Text = estadoUsuario;
+            if (usuario != null)
+            {
+                lblEstadoUsuario.Text = usuario.usuario; lblUltConexion.Visible = true; 
+                lblUltConexion.Text = $"Última conexión registrada: \r\n{usuario.ultConexion.ToString()}";
+            }
+            else
+            {
+                lblEstadoUsuario.Text = "Invitado"; lblUltConexion.Visible = false;
+            }
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

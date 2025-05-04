@@ -22,9 +22,9 @@ namespace PryGestionDeInventario
 
         private void frmModificarProducto_Load(object sender, EventArgs e)
         {
-            clsTemas.AplicarTema(this);
+            clsTemas.AplicarTema(this); clsTemas.AplicarTemaDgv(this);
 
-            llenarCombo(cmbCategoria);
+            llenarCombo(cmbCategoria); habilitarControles(false); //El usuario no podra utilizar los componentes sin antes clickear una fila.
 
             updCodigo.Maximum = 100; //updCodigoE.Maximum = 100; updCodigoE.Minimum = 1;
             updPrecio.DecimalPlaces = 2;
@@ -79,7 +79,7 @@ namespace PryGestionDeInventario
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             restablecerValores();
-            habilitarBoton();
+            habilitarBoton(); habilitarControles(false);
         }
 
         private void updCodigo_ValueChanged(object sender, EventArgs e)
@@ -158,7 +158,6 @@ namespace PryGestionDeInventario
             if (updCodigo.Value != 0 && txtNombre.Text != "" && txtDescripcion.Text != "" && updPrecio.Value != 0 &&
                 updStock.Value != 0 && cmbCategoria.SelectedIndex != -1)
             {
-
                 btnModificar.Enabled = true; btnModificar.BackColor = Color.SteelBlue;
             }
             else
@@ -169,6 +168,8 @@ namespace PryGestionDeInventario
 
         private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            habilitarControles(true); 
+
             //Verificar que el click no sea en el encabezado (siendo RowIndex == -1 el encabezado)
             if (e.RowIndex >= 0)
             {
@@ -195,6 +196,19 @@ namespace PryGestionDeInventario
             else
             {
                 MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para obtener los datos.", "ERROR AL OBTENER DATOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void habilitarControles(bool respuesta)
+        {
+            if (respuesta == true)
+            {
+                txtNombre.Enabled = true; txtDescripcion.Enabled = true; updPrecio.Enabled = true; updStock.Enabled = true;
+                cmbCategoria.Enabled = true;
+            } else
+            {
+                txtNombre.Enabled = false; txtDescripcion.Enabled = false; updPrecio.Enabled = false; updStock.Enabled = false;
+                cmbCategoria.Enabled = false;
             }
         }
 

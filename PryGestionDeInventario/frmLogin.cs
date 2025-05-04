@@ -18,12 +18,15 @@ namespace PryGestionDeInventario
             InitializeComponent();
         }
 
-        frmInicio mainForm = Application.OpenForms["frmInicio"] as frmInicio; //Obtener referencia al formulario de Inicio
+        frmInicio formPrincipal = Application.OpenForms["frmInicio"] as frmInicio; //Obtener referencia al formulario de Inicio
         clsConexionBD conexion = new clsConexionBD();
+        static public int intentosRestantes = 3;
+        static public Label lblAviso;
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
             clsTemas.AplicarTema(this);
+            lblAviso = lblIntentos;
 
             txtContraseña.UseSystemPasswordChar = true; //Contraseña oculta por defecto.
 
@@ -40,16 +43,14 @@ namespace PryGestionDeInventario
             if (clsUsuario.usuarioActual != null)
             {
                 frmInicio.logueado = true; //El usuario logueado esta habilitado a acceder a todas las secciones.
-                frmInicio.estadoUsuario = nom;
 
-                MessageBox.Show($"¡Bienvenido {nom}!","LOGIN EXITOSO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"¡Bienvenido {nom}!", "LOGIN EXITOSO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtUsuario.Clear(); txtContraseña.Clear();
                 conexion.ConectarBD();
 
-                mainForm.mostrarEstadoUsuario(); //Se llama al metodo que actualiza el label del frmInicio (Nombre de Usuario)
-                habilitarBotones(); //btnIngresar.Enabled = false; btnDesconectarse.Enabled = true;
-            } else 
-                MessageBox.Show("Usuario o contraseña incorrecta.", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                formPrincipal.mostrarEstadoUsuario(clsUsuario.usuarioActual); //Se llama al metodo que actualiza el label del frmInicio (Nombre de Usuario)
+                habilitarBotones();
+            }
         }
 
         private void btnDesconectarse_Click(object sender, EventArgs e)
@@ -60,14 +61,13 @@ namespace PryGestionDeInventario
             if (resultado == DialogResult.Yes)
             {
                 frmInicio.logueado = false; //El usuario pasa a ser Invitado, y se le restringe el acceso a secciones del programa
-                frmInicio.estadoUsuario = "Invitado";
                 clsUsuario.usuarioActual.ultConexion = DateTime.Now; //Se establece la nueva "Ultima Conexión"
                 conexion.actualizarUsuario(clsUsuario.usuarioActual); //Se procede a actualizar al usuario en la BBDD con la nueva "Ultima Conexión"
 
                 clsUsuario.usuarioActual = null;
-                MessageBox.Show("Se ha desconectado correctamente. Cambiando su estado a " + frmInicio.estadoUsuario, "DESCONEXIÓN EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                mainForm.mostrarEstadoUsuario(); //Se llama al metodo que actualiza el label del frmInicio (Nombre de Usuario)
-                habilitarBotones(); //btnDesconectarse.Enabled = false; btnIngresar.Enabled = true;
+                MessageBox.Show("Se ha desconectado correctamente. Cambiando su estado a Invitado", "DESCONEXIÓN EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                formPrincipal.mostrarEstadoUsuario(clsUsuario.usuarioActual); //Se llama al metodo que actualiza el label del frmInicio (Nombre de Usuario)
+                habilitarBotones();
             }
         }
 

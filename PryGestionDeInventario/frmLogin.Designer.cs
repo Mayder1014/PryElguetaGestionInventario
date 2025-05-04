@@ -40,6 +40,7 @@
             this.panelContenedor = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.lblIntentos = new System.Windows.Forms.Label();
             this.panelContenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -175,6 +176,7 @@
             this.panelContenedor.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panelContenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(182)))), ((int)(((byte)(212)))));
             this.panelContenedor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelContenedor.Controls.Add(this.lblIntentos);
             this.panelContenedor.Controls.Add(this.lblMensajeBienvenida);
             this.panelContenedor.Controls.Add(this.btnMostrarOcultar);
             this.panelContenedor.Controls.Add(this.lblContraseña);
@@ -214,6 +216,21 @@
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // lblIntentos
+            // 
+            this.lblIntentos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblIntentos.AutoSize = true;
+            this.lblIntentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIntentos.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblIntentos.Location = new System.Drawing.Point(171, 236);
+            this.lblIntentos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIntentos.Name = "lblIntentos";
+            this.lblIntentos.Size = new System.Drawing.Size(196, 16);
+            this.lblIntentos.TabIndex = 8;
+            this.lblIntentos.Text = "INTENTOS RESTANTES: 3";
+            this.lblIntentos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblIntentos.Visible = false;
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -251,5 +268,6 @@
         private System.Windows.Forms.Panel panelContenedor;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Label lblIntentos;
     }
 }
