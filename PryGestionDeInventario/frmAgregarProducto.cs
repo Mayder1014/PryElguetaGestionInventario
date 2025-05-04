@@ -19,8 +19,11 @@ namespace PryGestionDeInventario
 
         clsConexionBD conexion = new clsConexionBD();
         clsProductos lstProductos = new clsProductos();
+
         private void frmAgregarProducto_Load(object sender, EventArgs e)
         {
+            clsTemas.AplicarTema(this);
+
             llenarCombo(cmbCategoria);
 
             updCodigo.Maximum = 100; //updCodigoE.Maximum = 100; updCodigoE.Minimum = 1;

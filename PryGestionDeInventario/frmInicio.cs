@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,13 +19,15 @@ namespace PryGestionDeInventario
             InitializeComponent();
         }
 
-        clsConexionBD conexion = new clsConexionBD();
-        clsProductos lstProductos = new clsProductos();
-        static public bool ingresar = false;
+        static public bool logueado = false; //Variable que determinará cuando el usuario este logueado o no y pueda acceder a secciones del programa.
+        static public string estadoUsuario = "Invitado";
+        public Panel panelContenedor;
 
         private void frmInicio_Load(object sender, EventArgs e)
         {
-            
+            clsTemas.AplicarTema(this);
+            mostrarEstadoUsuario();
+            panelContenedor = panelFormularios; 
         }
 
         public void ocultarSubMenu()
@@ -77,45 +80,64 @@ namespace PryGestionDeInventario
             mostrarSubMenu(panelSubMenu);
         }
 
+        //Para visualizar el inventario, no se tiene ningun tipo de restricción, se haya logueado el usuario o no.
+        private void btnVisualizarInventario_Click(object sender, EventArgs e)
+        {
+            abrirFormulario(new frmInventario());
+
+            ocultarSubMenu();
+        }
+
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
-            if (ingresar != false)
+            if (permisoDeUsuario() != false)
             {
                 abrirFormulario(new frmAgregarProducto());
 
                 ocultarSubMenu();
             }
-            else 
-                MessageBox.Show("Debe ingresar antes de poder utilizar el programa.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnModificarProducto_Click(object sender, EventArgs e)
         {
-            if (ingresar != false)
+            if (permisoDeUsuario() != false)
             {
                 abrirFormulario(new frmModificarProducto());
 
                 ocultarSubMenu();
             }
-            else
-                MessageBox.Show("Debe ingresar antes de poder utilizar el programa.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void btnEliminarProducto_Click(object sender, EventArgs e)
         {
-            if (ingresar != false)
+            if (permisoDeUsuario() != false)
             {
                 abrirFormulario(new frmEliminarProducto());
 
                 ocultarSubMenu();
             }
-            else
-                MessageBox.Show("Debe ingresar antes de poder utilizar el programa.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        public bool permisoDeUsuario()
         {
-            this.Close();
+            bool resultado = false;
+
+            if (logueado != false)
+            {
+                resultado = true;
+            }
+            else
+            {
+                MessageBox.Show("Debe loguearse para poder tener acceder a esta sección", "ACCESO DENEGADO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return resultado;
+        }
+
+        
+        public void mostrarEstadoUsuario()
+        {
+            lblEstadoUsuario.Text = estadoUsuario;
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -123,9 +145,21 @@ namespace PryGestionDeInventario
             System.Diagnostics.Process.Start("https://github.com/Mayder1014");
         }
 
-        private void panelFormularios_Paint(object sender, PaintEventArgs e)
+        private void btnOpciones_Click(object sender, EventArgs e)
         {
+            abrirFormulario(new frmOpciones());
 
+            ocultarSubMenu();
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show("¿Está seguro que quiere salir del programa?", "CONFIRMAR SALIDA", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (respuesta != DialogResult.No)
+            {
+                this.Close();
+            }
         }
     }
 }

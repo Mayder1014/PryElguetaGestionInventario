@@ -22,6 +22,8 @@ namespace PryGestionDeInventario
 
         private void frmModificarProducto_Load(object sender, EventArgs e)
         {
+            clsTemas.AplicarTema(this);
+
             llenarCombo(cmbCategoria);
 
             updCodigo.Maximum = 100; //updCodigoE.Maximum = 100; updCodigoE.Minimum = 1;

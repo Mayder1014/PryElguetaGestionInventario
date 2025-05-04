@@ -274,14 +274,16 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVolver.BackColor = System.Drawing.SystemColors.Control;
+            this.btnVolver.BackgroundImage = global::PryGestionDeInventario.Properties.Resources.go_back;
+            this.btnVolver.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnVolver.FlatAppearance.BorderSize = 0;
+            this.btnVolver.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnVolver.Location = new System.Drawing.Point(13, 13);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(67, 28);
-            this.btnVolver.TabIndex = 42;
-            this.btnVolver.Text = "Volver";
+            this.btnVolver.Size = new System.Drawing.Size(42, 36);
+            this.btnVolver.TabIndex = 43;
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
