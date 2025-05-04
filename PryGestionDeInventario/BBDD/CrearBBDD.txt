@@ -20,4 +20,42 @@ VALUES
     (3, 'Silla de Oficina', 'Cómoda silla ergonómica para oficina', 60.00, 30, 'Bazar/Librería'),
     (4, 'Smartphone Samsung Galaxy S21', 'Teléfono móvil con cámara de 108MP', 600.00, 25, 'Electronicos'),
     (5, 'Carolina Herrera Very Good Girl', 'Perfume Carolina Herrera aroma Floral Frutal', 165.00, 50, 'Perfumes'),
-    (6, 'Detergente Cif', 'Detergente Cif BioActive Lima x300ml', 25.00, 35, 'Limpieza');
+
+    (6, 'Mouse Inalámbrico Logitech', 'Mouse ergonómico 1600DPI batería incluida', 25.00, 30, 'Electronicos'),
+    (7, 'Galletas Oreo Original', 'Paquete x6 unidades 432g', 4.50, 80, 'Alimentos'),
+    (8, 'Set de Cuadernos Norma', 'Pack x5 cuadernos rayados 100 hojas', 12.00, 45, 'Bazar/Librería'),
+    (9, 'Detergente Ariel', 'Detergente líquido para ropa 3L', 18.00, 25, 'Limpieza'),
+    (10, 'Perfume Hugo Boss Bottled', 'Eau de Toilette 100ml', 85.00, 15, 'Perfumes'),
+    (11, 'Teclado Mecánico Redragon', 'Teclado gaming switches Outemu Blue', 60.00, 18, 'Electronicos'),
+    (12, 'Arroz Gallo Oro', 'Arroz extra largo fino 1kg', 2.80, 120, 'Alimentos'),
+    (13, 'Portalápices de Madera', 'Organizador para escritorio 6 divisiones', 9.90, 35, 'Bazar/Librería'),
+    (14, 'Lavandina Ayudín', 'Botella 1L con dosificador', 3.50, 60, 'Limpieza'),
+    (15, 'Perfume Dolce&Gabbana Light Blue', 'Eau de Toilette 50ml', 72.00, 12, 'Perfumes'),
+    (16, 'Parlante Bluetooth JBL', 'Parlante portátil 10W resistencia al agua', 50.00, 22, 'Electronicos'),
+    (17, 'Leche en Polvo La Serenísima', 'Lata 400g entera fortificada', 6.20, 50, 'Alimentos'),
+    (18, 'Tijeras Escolares', 'Tijeras punta roma 17cm colores surtidos', 2.50, 90, 'Bazar/Librería'),
+    (19, 'Desinfectante Lysol', 'Aerosol 400ml multiusos', 7.80, 40, 'Limpieza'),
+    (20, 'Perfume Chanel N°5', 'Eau de Parfum 30ml', 120.00, 8, 'Perfumes'),
+    (21, 'Disco SSD Kingston 480GB', 'Disco sólido interno SATA III', 45.00, 28, 'Electronicos'),
+    (22, 'Harina Pureza', 'Harina 000 1kg fortificada', 1.80, 150, 'Alimentos'),
+    (23, 'Cinta Adhesiva Scotch', 'Rollo 48mm x 40m transparente', 4.20, 65, 'Bazar/Librería'),
+    (24, 'Jabón en Polvo Ala', 'Caja 800g con aroma a limpio', 5.90, 42, 'Limpieza'),
+    (25, 'Perfume Paco Rabanne 1 Million', 'Eau de Toilette 50ml', 78.00, 10, 'Perfumes'),
+    (26, 'Webcam Logitech C920', 'Cámara HD 1080p con micrófono', 70.00, 14, 'Electronicos'),
+    (27, 'Mermelada Arcor', 'Durazno 454g sin azúcar añadida', 3.40, 55, 'Alimentos'),
+    (28, 'Calculadora Científica Casio', 'Modelo fx-82MS con 240 funciones', 22.00, 30, 'Bazar/Librería'),
+    (29, 'Limpiador Multiuso Poett', 'Aroma lavanda 900ml', 6.50, 38, 'Limpieza');
+
+-- CREAR TABLA DE USUARIOS --------------------------------------------
+
+CREATE TABLE Usuarios (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Usuario NVARCHAR(50) NOT NULL UNIQUE,
+    Contraseña NVARCHAR(12) NOT NULL CHECK (LEN(Contraseña) BETWEEN 1 AND 12),
+    Estado BIT NOT NULL DEFAULT 1,
+    FechaUltimaConexion DATETIME NULL,
+);
+
+INSERT INTO Usuarios (Usuario, Contraseña, Estado, FechaUltimaConexion)
+VALUES
+('admin', 'admin', 1, GETDATE());
