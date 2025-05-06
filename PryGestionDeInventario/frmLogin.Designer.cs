@@ -193,7 +193,7 @@
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::PryGestionDeInventario.Properties.Resources.logoIES21_removebg_preview;
+            this.pictureBox1.BackgroundImage = global::PryGestionDeInventario.Properties.Resources.logoIES21;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(328, -3);
             this.pictureBox1.Name = "pictureBox1";

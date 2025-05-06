@@ -24,6 +24,11 @@ namespace PryGestionDeInventario
         {
             clsTemas.AplicarTema(this); clsTemas.AplicarTemaDgv(this);
 
+            if (clsTemas.esTemaOscuro == true)
+            {
+                lblIngresar.ForeColor = Color.White; mrcBuscarFiltrar.BackColor = Color.White; btnFiltrar.BackColor= Color.White;
+            }
+
             llenarCombo(cmbIngresar);
             dgvProductos.ReadOnly = true;
             conexion.obtenerDatos(dgvProductos);

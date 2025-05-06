@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblIngresar = new System.Windows.Forms.Label();
             this.btnFiltrar = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mrcBuscarFiltrar = new System.Windows.Forms.GroupBox();
             this.optFiltrarCategoria = new System.Windows.Forms.RadioButton();
             this.optBuscarCodigo = new System.Windows.Forms.RadioButton();
             this.cmbIngresar = new System.Windows.Forms.ComboBox();
@@ -40,7 +40,7 @@
             this.updIngresar = new System.Windows.Forms.NumericUpDown();
             this.btnMostrarTodo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.mrcBuscarFiltrar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.updIngresar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,23 +57,25 @@
             this.dgvProductos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersWidth = 51;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            this.dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            this.dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductos.Size = new System.Drawing.Size(891, 549);
             this.dgvProductos.TabIndex = 32;
             // 
-            // label1
+            // lblIngresar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(321, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 16);
-            this.label1.TabIndex = 34;
-            this.label1.Text = "Ingresar:";
+            this.lblIngresar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblIngresar.AutoSize = true;
+            this.lblIngresar.Location = new System.Drawing.Point(321, 47);
+            this.lblIngresar.Name = "lblIngresar";
+            this.lblIngresar.Size = new System.Drawing.Size(59, 16);
+            this.lblIngresar.TabIndex = 34;
+            this.lblIngresar.Text = "Ingresar:";
             // 
             // btnFiltrar
             // 
+            this.btnFiltrar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFiltrar.Location = new System.Drawing.Point(386, 83);
             this.btnFiltrar.Name = "btnFiltrar";
@@ -83,16 +85,17 @@
             this.btnFiltrar.UseVisualStyleBackColor = true;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
-            // groupBox1
+            // mrcBuscarFiltrar
             // 
-            this.groupBox1.Controls.Add(this.optFiltrarCategoria);
-            this.groupBox1.Controls.Add(this.optBuscarCodigo);
-            this.groupBox1.Location = new System.Drawing.Point(93, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(152, 100);
-            this.groupBox1.TabIndex = 36;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Buscar/Filtrar..";
+            this.mrcBuscarFiltrar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.mrcBuscarFiltrar.Controls.Add(this.optFiltrarCategoria);
+            this.mrcBuscarFiltrar.Controls.Add(this.optBuscarCodigo);
+            this.mrcBuscarFiltrar.Location = new System.Drawing.Point(93, 12);
+            this.mrcBuscarFiltrar.Name = "mrcBuscarFiltrar";
+            this.mrcBuscarFiltrar.Size = new System.Drawing.Size(152, 100);
+            this.mrcBuscarFiltrar.TabIndex = 36;
+            this.mrcBuscarFiltrar.TabStop = false;
+            this.mrcBuscarFiltrar.Text = "Buscar/Filtrar..";
             // 
             // optFiltrarCategoria
             // 
@@ -120,6 +123,7 @@
             // 
             // cmbIngresar
             // 
+            this.cmbIngresar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cmbIngresar.FormattingEnabled = true;
             this.cmbIngresar.Location = new System.Drawing.Point(386, 46);
             this.cmbIngresar.Name = "cmbIngresar";
@@ -146,6 +150,7 @@
             // 
             // updIngresar
             // 
+            this.updIngresar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.updIngresar.Location = new System.Drawing.Point(386, 46);
             this.updIngresar.Name = "updIngresar";
             this.updIngresar.Size = new System.Drawing.Size(139, 22);
@@ -154,6 +159,7 @@
             // 
             // btnMostrarTodo
             // 
+            this.btnMostrarTodo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnMostrarTodo.Location = new System.Drawing.Point(698, 47);
             this.btnMostrarTodo.Name = "btnMostrarTodo";
             this.btnMostrarTodo.Size = new System.Drawing.Size(114, 45);
@@ -171,16 +177,16 @@
             this.Controls.Add(this.updIngresar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.cmbIngresar);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.mrcBuscarFiltrar);
             this.Controls.Add(this.btnFiltrar);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblIngresar);
             this.Controls.Add(this.dgvProductos);
             this.Name = "frmInventario";
             this.Text = "frmInventario";
             this.Load += new System.EventHandler(this.frmInventario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.mrcBuscarFiltrar.ResumeLayout(false);
+            this.mrcBuscarFiltrar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.updIngresar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -190,9 +196,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvProductos;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblIngresar;
         private System.Windows.Forms.Button btnFiltrar;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox mrcBuscarFiltrar;
         private System.Windows.Forms.RadioButton optFiltrarCategoria;
         private System.Windows.Forms.RadioButton optBuscarCodigo;
         private System.Windows.Forms.ComboBox cmbIngresar;

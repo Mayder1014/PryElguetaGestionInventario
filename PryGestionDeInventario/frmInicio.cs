@@ -19,6 +19,7 @@ namespace PryGestionDeInventario
             InitializeComponent();
         }
 
+        clsConexionBD conexion = new clsConexionBD();
         static public bool logueado = false; //Variable que determinará cuando el usuario este logueado o no y pueda acceder a secciones del programa.
         public Panel panelContenedor;
 
@@ -127,7 +128,7 @@ namespace PryGestionDeInventario
             }
             else
             {
-                MessageBox.Show("Debe loguearse para poder tener acceder a esta sección", "ACCESO DENEGADO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ahora mismo se encuentra como Invitado. Debe loguearse para tener acceso a esta sección", "ACCESO DENEGADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return resultado;
@@ -147,11 +148,6 @@ namespace PryGestionDeInventario
             }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/Mayder1014");
-        }
-
         private void btnOpciones_Click(object sender, EventArgs e)
         {
             abrirFormulario(new frmOpciones());
@@ -165,8 +161,27 @@ namespace PryGestionDeInventario
 
             if (respuesta != DialogResult.No)
             {
+                if (clsUsuario.usuarioActual != null)
+                {
+                    clsUsuario.usuarioActual.ultConexion = DateTime.Now; //Se establece la nueva "Ultima Conexión"
+                    conexion.actualizarUsuario(clsUsuario.usuarioActual); //Se procede a actualizar al usuario en la BBDD con la nueva "Ultima Conexión"
+                }
                 this.Close();
             }
+        }
+
+        private void frmInicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (clsUsuario.usuarioActual != null)
+            {
+                clsUsuario.usuarioActual.ultConexion = DateTime.Now; //Se establece la nueva "Ultima Conexión"
+                conexion.actualizarUsuario(clsUsuario.usuarioActual); //Se procede a actualizar al usuario en la BBDD con la nueva "Ultima Conexión"
+            }
+        }
+
+        private void lblLinkGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Mayder1014");
         }
     }
 }

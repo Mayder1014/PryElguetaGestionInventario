@@ -35,8 +35,13 @@
             this.optTemaClaro = new System.Windows.Forms.RadioButton();
             this.optTemaOscuro = new System.Windows.Forms.RadioButton();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.mrcDesbloquearUsuarios = new System.Windows.Forms.GroupBox();
+            this.btnDesbloquear = new System.Windows.Forms.Button();
+            this.cmbUsuariosBloqueados = new System.Windows.Forms.ComboBox();
+            this.lblInstruccionAdmin = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.mrcDesbloquearUsuarios.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -136,11 +141,69 @@
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // mrcDesbloquearUsuarios
+            // 
+            this.mrcDesbloquearUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mrcDesbloquearUsuarios.BackColor = System.Drawing.Color.IndianRed;
+            this.mrcDesbloquearUsuarios.Controls.Add(this.btnDesbloquear);
+            this.mrcDesbloquearUsuarios.Controls.Add(this.cmbUsuariosBloqueados);
+            this.mrcDesbloquearUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mrcDesbloquearUsuarios.Location = new System.Drawing.Point(108, 361);
+            this.mrcDesbloquearUsuarios.Name = "mrcDesbloquearUsuarios";
+            this.mrcDesbloquearUsuarios.Size = new System.Drawing.Size(675, 83);
+            this.mrcDesbloquearUsuarios.TabIndex = 44;
+            this.mrcDesbloquearUsuarios.TabStop = false;
+            this.mrcDesbloquearUsuarios.Text = "Desbloquear Usuarios";
+            this.mrcDesbloquearUsuarios.Visible = false;
+            // 
+            // btnDesbloquear
+            // 
+            this.btnDesbloquear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDesbloquear.BackColor = System.Drawing.Color.Red;
+            this.btnDesbloquear.Enabled = false;
+            this.btnDesbloquear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDesbloquear.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDesbloquear.Location = new System.Drawing.Point(489, 36);
+            this.btnDesbloquear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDesbloquear.Name = "btnDesbloquear";
+            this.btnDesbloquear.Size = new System.Drawing.Size(169, 33);
+            this.btnDesbloquear.TabIndex = 3;
+            this.btnDesbloquear.Text = "Desbloquear";
+            this.btnDesbloquear.UseVisualStyleBackColor = false;
+            this.btnDesbloquear.Click += new System.EventHandler(this.btnDesbloquear_Click);
+            // 
+            // cmbUsuariosBloqueados
+            // 
+            this.cmbUsuariosBloqueados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbUsuariosBloqueados.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbUsuariosBloqueados.FormattingEnabled = true;
+            this.cmbUsuariosBloqueados.Location = new System.Drawing.Point(16, 38);
+            this.cmbUsuariosBloqueados.Name = "cmbUsuariosBloqueados";
+            this.cmbUsuariosBloqueados.Size = new System.Drawing.Size(453, 28);
+            this.cmbUsuariosBloqueados.TabIndex = 0;
+            this.cmbUsuariosBloqueados.SelectedIndexChanged += new System.EventHandler(this.cmbUsuariosBloqueados_SelectedIndexChanged);
+            // 
+            // lblInstruccionAdmin
+            // 
+            this.lblInstruccionAdmin.AutoSize = true;
+            this.lblInstruccionAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInstruccionAdmin.Location = new System.Drawing.Point(105, 307);
+            this.lblInstruccionAdmin.Name = "lblInstruccionAdmin";
+            this.lblInstruccionAdmin.Size = new System.Drawing.Size(589, 40);
+            this.lblInstruccionAdmin.TabIndex = 45;
+            this.lblInstruccionAdmin.Text = "* A continuación puede ver los usuarios que fueron bloqueados.\r\n  Si desea desblo" +
+    "quear alguno, seleccionelo y haga click en el botón.";
+            this.lblInstruccionAdmin.Visible = false;
+            // 
             // frmOpciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 690);
+            this.Controls.Add(this.lblInstruccionAdmin);
+            this.Controls.Add(this.mrcDesbloquearUsuarios);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -151,7 +214,9 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.mrcDesbloquearUsuarios.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -164,5 +229,9 @@
         private System.Windows.Forms.RadioButton optTemaClaro;
         private System.Windows.Forms.RadioButton optTemaOscuro;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.GroupBox mrcDesbloquearUsuarios;
+        private System.Windows.Forms.ComboBox cmbUsuariosBloqueados;
+        private System.Windows.Forms.Button btnDesbloquear;
+        private System.Windows.Forms.Label lblInstruccionAdmin;
     }
 }

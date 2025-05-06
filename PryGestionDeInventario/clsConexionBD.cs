@@ -73,13 +73,13 @@ namespace PryGestionDeInventario
                             {
                                 if (contraseñaBD == contraseña) //Resultado: Se encuentra al usuario y se loguea -> intentos reseteados.
                                 {
-                                    frmLogin.intentosRestantes = 3; frmLogin.lblAviso.Visible = false;
+                                    frmLogin.intentosRestantes = 3; frmLogin.lblAvisoIntentos.Visible = false;
                                     return aux;
                                 }
                                 else //Resultado: Se encuentra al usuario pero la contraseña es incorrecta. Se le advierte de intentos y posible bloqueo
                                 {
-                                    frmLogin.intentosRestantes--; frmLogin.lblAviso.Visible = true;
-                                    frmLogin.lblAviso.Text = $"INTENTOS RESTANTES: {frmLogin.intentosRestantes}";
+                                    frmLogin.intentosRestantes--; frmLogin.lblAvisoIntentos.Visible = true;
+                                    frmLogin.lblAvisoIntentos.Text = $"INTENTOS RESTANTES: {frmLogin.intentosRestantes}";
 
                                     if (frmLogin.intentosRestantes > 0) //Resultado: Advertencia
                                     {
@@ -89,13 +89,13 @@ namespace PryGestionDeInventario
                                     {
                                         aux.estado = 0;
                                         actualizarUsuario(aux);
-                                        MessageBox.Show("INTENTOS AGOTADOS. El usuario ha sido bloqueado.");
+                                        MessageBox.Show("El usuario ha sido bloqueado.", "INTENTOS AGOTADOS", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                                     }
                                 }
                             } 
                             else //Resultado: El usuario ya se encuentra bloqueado. Se le notifica al usuario.
                             {
-                                MessageBox.Show("El usuario se encuentra bloqueado.");
+                                MessageBox.Show("El usuario se encuentra bloqueado.", "USUARIO BLOQUEADO" , MessageBoxButtons.OK, MessageBoxIcon.Hand);
                             }
                         }
                         else //Resultado: No se encuentra / No existe el usuario
@@ -113,7 +113,7 @@ namespace PryGestionDeInventario
             return null; // Retorna null si no se encuentra o no coincide la contraseña
         }
 
-        public void cargarUsuarios(List<clsUsuario> lstUsuarios)
+        public List<clsUsuario> cargarListaUsuariosBloqueados()
         {
             try
             {
@@ -123,7 +123,7 @@ namespace PryGestionDeInventario
 
                 conexionBaseDatos.Open();
 
-                string query = "SELECT * FROM Usuarios";
+                string query = "SELECT * FROM Usuarios WHERE Estado = 0";
                 comandoBaseDatos = new SqlCommand(query, conexionBaseDatos);
 
                 //Crear un DataTable
@@ -135,18 +135,26 @@ namespace PryGestionDeInventario
                     tablaUsuarios.Load(reader);
                 }
 
-                foreach (DataRow fila in tablaUsuarios.Rows)
+                if (tablaUsuarios != null)
                 {
-                    clsUsuario usuario = new clsUsuario(Convert.ToInt32(fila[0]), fila[1].ToString(), fila[2].ToString(),
-                        Convert.ToInt32(fila[3]), Convert.ToDateTime(fila[4]));
+                    List<clsUsuario> lstUsuarios = new List<clsUsuario>();
 
-                    lstUsuarios.Add(usuario);
+                    foreach (DataRow fila in tablaUsuarios.Rows)
+                    {
+                        clsUsuario usuario = new clsUsuario(Convert.ToInt32(fila[0]), fila[1].ToString(), fila[2].ToString(),
+                            Convert.ToInt32(fila[3]), Convert.ToDateTime(fila[4]));
+
+                        lstUsuarios.Add(usuario);
+                    }
+                    return lstUsuarios; //Retorna la lista de usuarios bloqueados e ignora el return del final.
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+            return null; //Retornará null si no existen usuarios bloqueados.
         }
 
         public void actualizarUsuario(clsUsuario usuario)

@@ -34,7 +34,7 @@
             this.btnOpciones = new System.Windows.Forms.Button();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lblLinkGithub = new System.Windows.Forms.LinkLabel();
             this.panelSubMenu = new System.Windows.Forms.Panel();
             this.btnEliminarProducto = new System.Windows.Forms.Button();
             this.btnModificarProducto = new System.Windows.Forms.Button();
@@ -43,11 +43,11 @@
             this.btnGestionInventario = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
+            this.lblUltConexion = new System.Windows.Forms.Label();
             this.lblEstadoUsuario = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblAvisoDeConexion = new System.Windows.Forms.Label();
             this.panelFormularios = new System.Windows.Forms.Panel();
-            this.lblUltConexion = new System.Windows.Forms.Label();
             this.panelMenuLateral.SuspendLayout();
             this.panelInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -82,7 +82,7 @@
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSalir.Image = global::PryGestionDeInventario.Properties.Resources.logout;
+            this.btnSalir.Image = global::PryGestionDeInventario.Properties.Resources.exit;
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSalir.Location = new System.Drawing.Point(0, 445);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -120,7 +120,7 @@
             // panelInfo
             // 
             this.panelInfo.Controls.Add(this.pictureBox1);
-            this.panelInfo.Controls.Add(this.linkLabel1);
+            this.panelInfo.Controls.Add(this.lblLinkGithub);
             this.panelInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelInfo.Location = new System.Drawing.Point(0, 597);
             this.panelInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -140,19 +140,19 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // linkLabel1
+            // lblLinkGithub
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(25, 120);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(172, 16);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Github del Programador";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.lblLinkGithub.AutoSize = true;
+            this.lblLinkGithub.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLinkGithub.LinkColor = System.Drawing.Color.Black;
+            this.lblLinkGithub.Location = new System.Drawing.Point(25, 120);
+            this.lblLinkGithub.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLinkGithub.Name = "lblLinkGithub";
+            this.lblLinkGithub.Size = new System.Drawing.Size(172, 16);
+            this.lblLinkGithub.TabIndex = 0;
+            this.lblLinkGithub.TabStop = true;
+            this.lblLinkGithub.Text = "Github del Programador";
+            this.lblLinkGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblLinkGithub_LinkClicked);
             // 
             // panelSubMenu
             // 
@@ -172,7 +172,7 @@
             // btnEliminarProducto
             // 
             this.btnEliminarProducto.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnEliminarProducto.Image = global::PryGestionDeInventario.Properties.Resources.image__1_;
+            this.btnEliminarProducto.Image = global::PryGestionDeInventario.Properties.Resources.delete;
             this.btnEliminarProducto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEliminarProducto.Location = new System.Drawing.Point(0, 96);
             this.btnEliminarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -188,7 +188,7 @@
             // btnModificarProducto
             // 
             this.btnModificarProducto.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnModificarProducto.Image = global::PryGestionDeInventario.Properties.Resources.writing;
+            this.btnModificarProducto.Image = global::PryGestionDeInventario.Properties.Resources.modify;
             this.btnModificarProducto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnModificarProducto.Location = new System.Drawing.Point(0, 64);
             this.btnModificarProducto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -241,7 +241,7 @@
             this.btnGestionInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGestionInventario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGestionInventario.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnGestionInventario.Image = global::PryGestionDeInventario.Properties.Resources.image;
+            this.btnGestionInventario.Image = global::PryGestionDeInventario.Properties.Resources.inventoryManagment;
             this.btnGestionInventario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGestionInventario.Location = new System.Drawing.Point(0, 227);
             this.btnGestionInventario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -262,7 +262,7 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLogin.Image = global::PryGestionDeInventario.Properties.Resources.user__2_;
+            this.btnLogin.Image = global::PryGestionDeInventario.Properties.Resources.login;
             this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLogin.Location = new System.Drawing.Point(0, 191);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -287,6 +287,19 @@
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(237, 191);
             this.panelLogo.TabIndex = 0;
+            // 
+            // lblUltConexion
+            // 
+            this.lblUltConexion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUltConexion.AutoSize = true;
+            this.lblUltConexion.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUltConexion.Location = new System.Drawing.Point(11, 100);
+            this.lblUltConexion.Name = "lblUltConexion";
+            this.lblUltConexion.Size = new System.Drawing.Size(169, 32);
+            this.lblUltConexion.TabIndex = 3;
+            this.lblUltConexion.Text = "Última conexión registrada:\r\n...";
+            this.lblUltConexion.Visible = false;
             // 
             // lblEstadoUsuario
             // 
@@ -329,7 +342,7 @@
             // 
             this.panelFormularios.AutoScroll = true;
             this.panelFormularios.BackColor = System.Drawing.SystemColors.Control;
-            this.panelFormularios.BackgroundImage = global::PryGestionDeInventario.Properties.Resources.logoIES21_removebg_preview;
+            this.panelFormularios.BackgroundImage = global::PryGestionDeInventario.Properties.Resources.logoIES21;
             this.panelFormularios.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelFormularios.Cursor = System.Windows.Forms.Cursors.Default;
             this.panelFormularios.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -338,19 +351,6 @@
             this.panelFormularios.Name = "panelFormularios";
             this.panelFormularios.Size = new System.Drawing.Size(936, 746);
             this.panelFormularios.TabIndex = 30;
-            // 
-            // lblUltConexion
-            // 
-            this.lblUltConexion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUltConexion.AutoSize = true;
-            this.lblUltConexion.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUltConexion.Location = new System.Drawing.Point(11, 100);
-            this.lblUltConexion.Name = "lblUltConexion";
-            this.lblUltConexion.Size = new System.Drawing.Size(169, 32);
-            this.lblUltConexion.TabIndex = 3;
-            this.lblUltConexion.Text = "Última conexión registrada:\r\n...";
-            this.lblUltConexion.Visible = false;
             // 
             // frmInicio
             // 
@@ -366,6 +366,7 @@
             this.Name = "frmInicio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inicio - Gestión De Inventario";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmInicio_FormClosing);
             this.Load += new System.EventHandler(this.frmInicio_Load);
             this.panelMenuLateral.ResumeLayout(false);
             this.panelInfo.ResumeLayout(false);
@@ -388,7 +389,7 @@
         private System.Windows.Forms.Panel panelSubMenu;
         private System.Windows.Forms.Panel panelFormularios;
         private System.Windows.Forms.Panel panelInfo;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel lblLinkGithub;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnVisualizarInventario;
         private System.Windows.Forms.Button btnAgregarProducto;

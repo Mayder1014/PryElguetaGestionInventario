@@ -87,6 +87,7 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescripcion.Location = new System.Drawing.Point(123, 180);
             this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4);
@@ -98,6 +99,7 @@
             // 
             // updStock
             // 
+            this.updStock.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.updStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updStock.Location = new System.Drawing.Point(513, 90);
             this.updStock.Margin = new System.Windows.Forms.Padding(4);
@@ -108,6 +110,7 @@
             // 
             // updPrecio
             // 
+            this.updPrecio.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.updPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updPrecio.Location = new System.Drawing.Point(301, 90);
             this.updPrecio.Margin = new System.Windows.Forms.Padding(4);
@@ -118,6 +121,7 @@
             // 
             // label9
             // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(59, 139);
@@ -129,6 +133,7 @@
             // 
             // label10
             // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(36, 185);
@@ -140,6 +145,7 @@
             // 
             // updCodigo
             // 
+            this.updCodigo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.updCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updCodigo.Location = new System.Drawing.Point(123, 91);
             this.updCodigo.Margin = new System.Windows.Forms.Padding(4);
@@ -150,6 +156,7 @@
             // 
             // label11
             // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(372, 139);
@@ -161,6 +168,7 @@
             // 
             // label12
             // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(243, 91);
@@ -172,6 +180,7 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.Location = new System.Drawing.Point(123, 137);
             this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
@@ -182,6 +191,7 @@
             // 
             // label13
             // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(461, 91);
@@ -193,6 +203,7 @@
             // 
             // cmbCategoria
             // 
+            this.cmbCategoria.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cmbCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCategoria.FormattingEnabled = true;
             this.cmbCategoria.Location = new System.Drawing.Point(444, 137);
@@ -206,6 +217,7 @@
             // 
             // label8
             // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(60, 92);
@@ -217,6 +229,7 @@
             // 
             // lblAviso
             // 
+            this.lblAviso.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblAviso.AutoSize = true;
             this.lblAviso.BackColor = System.Drawing.Color.Lavender;
             this.lblAviso.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;

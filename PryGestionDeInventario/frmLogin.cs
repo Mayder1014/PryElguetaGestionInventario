@@ -21,12 +21,17 @@ namespace PryGestionDeInventario
         frmInicio formPrincipal = Application.OpenForms["frmInicio"] as frmInicio; //Obtener referencia al formulario de Inicio
         clsConexionBD conexion = new clsConexionBD();
         static public int intentosRestantes = 3;
-        static public Label lblAviso;
+        static public Label lblAvisoIntentos;
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
             clsTemas.AplicarTema(this);
-            lblAviso = lblIntentos;
+            lblAvisoIntentos = lblIntentos;
+
+            if (clsTemas.esTemaOscuro == true)
+            {
+                lblMensajeDeAviso.ForeColor = Color.WhiteSmoke;
+            }
 
             txtContraseña.UseSystemPasswordChar = true; //Contraseña oculta por defecto.
 
