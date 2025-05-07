@@ -26,7 +26,7 @@ namespace PryGestionDeInventario
 
             llenarCombo(cmbCategoria); habilitarControles(false); //El usuario no podra utilizar los componentes sin antes clickear una fila.
 
-            updCodigo.Maximum = 100; //updCodigoE.Maximum = 100; updCodigoE.Minimum = 1;
+            updCodigo.Maximum = 100;
             updPrecio.DecimalPlaces = 2;
             updStock.Maximum = 1000; updPrecio.Maximum = 10000;
 
@@ -35,6 +35,8 @@ namespace PryGestionDeInventario
             conexion.obtenerDatos(dgvProductos);
             dgvProductos.ClearSelection();
         }
+
+        #region Eventos
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -82,6 +84,11 @@ namespace PryGestionDeInventario
             habilitarBoton(); habilitarControles(false);
         }
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void updCodigo_ValueChanged(object sender, EventArgs e)
         {
             habilitarBoton();
@@ -117,7 +124,43 @@ namespace PryGestionDeInventario
             e.Handled = true;
         }
 
-        //----------------------------------------------------------------------------------------------------------------
+        private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            habilitarControles(true);
+
+            //Verificar que el click no sea en el encabezado (siendo RowIndex == -1 el encabezado)
+            if (e.RowIndex >= 0)
+            {
+                // Obtener la fila seleccionada
+                DataGridViewRow filaSeleccionada = dgvProductos.Rows[e.RowIndex];
+
+                //Crear un vector con la cantidad de celdas que tiene la fila / Crear variable de indice
+                string[] vecDatos = new string[filaSeleccionada.Cells.Count]; int i = 0;
+
+                //Recorrer cada celda de la fila y guardar su valor en el vector
+                foreach (DataGridViewCell celda in filaSeleccionada.Cells)
+                {
+                    vecDatos[i] = celda.Value.ToString();
+                    i++;
+                }
+
+                updCodigo.Value = Convert.ToDecimal(vecDatos[0]); txtNombre.Text = vecDatos[1];
+                txtDescripcion.Text = vecDatos[2]; updPrecio.Value = Convert.ToDecimal(vecDatos[3]);
+                updStock.Value = Convert.ToDecimal(vecDatos[4]);
+
+                int indice = cmbCategoria.FindStringExact(vecDatos[5]); //<--- Devuelve el indice del elemento del cmb que coincida con el string enviado por parametro.
+                cmbCategoria.SelectedIndex = indice;
+            }
+            else
+            {
+                MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para obtener los datos.", "ERROR AL OBTENER DATOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        #endregion
+
+        #region Metodos
+
         public void llenarCombo(ComboBox cmb)
         {
             cmb.Items.Clear();
@@ -166,39 +209,6 @@ namespace PryGestionDeInventario
             }
         }
 
-        private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            habilitarControles(true); 
-
-            //Verificar que el click no sea en el encabezado (siendo RowIndex == -1 el encabezado)
-            if (e.RowIndex >= 0)
-            {
-                // Obtener la fila seleccionada
-                DataGridViewRow filaSeleccionada = dgvProductos.Rows[e.RowIndex];
-
-                //Crear un vector con la cantidad de celdas que tiene la fila / Crear variable de indice
-                string[] vecDatos = new string[filaSeleccionada.Cells.Count]; int i = 0;
-
-                //Recorrer cada celda de la fila y guardar su valor en el vector
-                foreach (DataGridViewCell celda in filaSeleccionada.Cells)
-                {
-                    vecDatos[i] = celda.Value.ToString();
-                    i++;
-                }
-
-                updCodigo.Value = Convert.ToDecimal(vecDatos[0]); txtNombre.Text = vecDatos[1];
-                txtDescripcion.Text = vecDatos[2]; updPrecio.Value = Convert.ToDecimal(vecDatos[3]);
-                updStock.Value = Convert.ToDecimal(vecDatos[4]);
-
-                int indice = cmbCategoria.FindStringExact(vecDatos[5]); //<--- Devuelve el indice del elemento del cmb que coincida con el string enviado por parametro.
-                cmbCategoria.SelectedIndex = indice;
-            }
-            else
-            {
-                MessageBox.Show("Debe clickear en alguna de las filas donde se encuentra un producto para obtener los datos.", "ERROR AL OBTENER DATOS", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
         public void habilitarControles(bool respuesta)
         {
             if (respuesta == true)
@@ -212,9 +222,6 @@ namespace PryGestionDeInventario
             }
         }
 
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #endregion
     }
 }

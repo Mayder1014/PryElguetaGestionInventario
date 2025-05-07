@@ -20,23 +20,23 @@ namespace PryGestionDeInventario
 
         frmInicio formPrincipal = Application.OpenForms["frmInicio"] as frmInicio; //Obtener referencia al formulario de Inicio
         clsConexionBD conexion = new clsConexionBD();
-        static public int intentosRestantes = 3;
-        static public Label lblAvisoIntentos;
+        static public int intentosRestantes = 3; //Variable que se instancia como static public para usarse tambien en clsConexion
+        static public Label lblAvisoIntentos; //Variable creada con el proposito de "referenciar" al componente "lblIntentos".
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
             clsTemas.AplicarTema(this);
-            lblAvisoIntentos = lblIntentos;
-
             if (clsTemas.esTemaOscuro == true)
             {
                 lblMensajeDeAviso.ForeColor = Color.WhiteSmoke;
             }
 
+            lblAvisoIntentos = lblIntentos;
             txtContraseña.UseSystemPasswordChar = true; //Contraseña oculta por defecto.
-
             habilitarBotones();
         }
+
+        #region Eventos
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
@@ -53,7 +53,7 @@ namespace PryGestionDeInventario
                 txtUsuario.Clear(); txtContraseña.Clear();
                 conexion.ConectarBD();
 
-                formPrincipal.mostrarEstadoUsuario(clsUsuario.usuarioActual); //Se llama al metodo que actualiza el label del frmInicio (Nombre de Usuario)
+                formPrincipal.mostrarEstadoUsuario(); //Se llama al metodo que actualiza el label del frmInicio (Nombre de Usuario)
                 habilitarBotones();
             }
         }
@@ -71,7 +71,7 @@ namespace PryGestionDeInventario
 
                 clsUsuario.usuarioActual = null;
                 MessageBox.Show("Se ha desconectado correctamente. Cambiando su estado a Invitado", "DESCONEXIÓN EXITOSA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                formPrincipal.mostrarEstadoUsuario(clsUsuario.usuarioActual); //Se llama al metodo que actualiza el label del frmInicio (Nombre de Usuario)
+                formPrincipal.mostrarEstadoUsuario(); //Se llama al metodo que actualiza el label del frmInicio (Nombre de Usuario)
                 habilitarBotones();
             }
         }
@@ -90,6 +90,11 @@ namespace PryGestionDeInventario
             }
         }
 
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
             habilitarBotones();
@@ -99,6 +104,8 @@ namespace PryGestionDeInventario
         {
             habilitarBotones();
         }
+
+        #endregion
 
         public void habilitarBotones()
         {
@@ -120,11 +127,6 @@ namespace PryGestionDeInventario
 
             if (btnIngresar.Enabled == false) btnIngresar.BackColor = SystemColors.ScrollBar;
             else btnIngresar.BackColor = SystemColors.Control;
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

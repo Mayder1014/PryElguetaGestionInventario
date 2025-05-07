@@ -58,7 +58,12 @@ CREATE TABLE Usuarios (
 
 INSERT INTO Usuarios (Usuario, Contraseña, Estado, FechaUltimaConexion)
 VALUES
-('admin', 'admin', 1, GETDATE());
+('admin', 'admin', 1, GETDATE()),
+('Mayder', 'facundo', 1, GETDATE()),
+('Arcorax', 'mariano', 1, GETDATE()),
+('alumno1', 'abcd1', 0, GETDATE()),
+('alumno2', 'abcd2', 0, GETDATE()),
+('alumno3', 'abcd3', 0, GETDATE());
 
 -- En caso de necesitar desbloquear usuarios ---------------------------
 

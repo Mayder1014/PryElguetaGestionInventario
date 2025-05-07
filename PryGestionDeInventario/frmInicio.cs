@@ -21,52 +21,17 @@ namespace PryGestionDeInventario
 
         clsConexionBD conexion = new clsConexionBD();
         static public bool logueado = false; //Variable que determinará cuando el usuario este logueado o no y pueda acceder a secciones del programa.
-        public Panel panelContenedor;
+        public Panel panelContenedor; //Variable creada con el proposito de "referenciar" al componente "panelFormularios".
 
         private void frmInicio_Load(object sender, EventArgs e)
         {
             clsTemas.AplicarTema(this);
-            mostrarEstadoUsuario(clsUsuario.usuarioActual);
-            panelContenedor = panelFormularios; 
+            mostrarEstadoUsuario();
+            panelContenedor = panelFormularios; //Aquí es donde la variable apuntará al componente y permitira que, desde otros formularios, lo que le pase
+            //a la variable panelContenedor le ocurra al panelFormularios (como cuando se cambia al tema oscuro).
         }
 
-        public void ocultarSubMenu()
-        {
-            if (panelSubMenu.Visible == true)
-            {
-                panelSubMenu.Visible = false;
-            }
-        }
-
-        public void mostrarSubMenu(Panel subMenu)
-        {
-            if (subMenu.Visible == false)
-            {
-                ocultarSubMenu();
-                subMenu.Visible = true;
-            }
-            else
-            {
-                subMenu.Visible = false;
-            }
-        }
-
-        private Form formActivo = null;
-        private void abrirFormulario(Form formulario)
-        {
-            if (formActivo != null) //Si exite un formulario activo, se cierra
-            {
-                formActivo.Close();
-            }
-            formActivo = formulario; //Se almacena el formulario activo
-            formulario.TopLevel = false; //Indica que el formulario no es de nivel superior
-            formulario.FormBorderStyle = FormBorderStyle.None;
-            formulario.Dock = DockStyle.Fill;
-            panelFormularios.Controls.Add(formulario);
-            panelFormularios.Tag = formulario; //Asocia el form con el panel "contenedor"
-            formulario.BringToFront();
-            formulario.Show();
-        }
+        #region Abrir formularios / Eventos
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -118,36 +83,6 @@ namespace PryGestionDeInventario
             }
         }
 
-        public bool permisoDeUsuario()
-        {
-            bool resultado = false;
-
-            if (logueado != false)
-            {
-                resultado = true;
-            }
-            else
-            {
-                MessageBox.Show("Ahora mismo se encuentra como Invitado. Debe loguearse para tener acceso a esta sección", "ACCESO DENEGADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return resultado;
-        }
-
-        
-        public void mostrarEstadoUsuario(clsUsuario usuario)
-        {
-            if (usuario != null)
-            {
-                lblEstadoUsuario.Text = usuario.usuario; lblUltConexion.Visible = true; 
-                lblUltConexion.Text = $"Última conexión registrada: \r\n{usuario.ultConexion.ToString()}";
-            }
-            else
-            {
-                lblEstadoUsuario.Text = "Invitado"; lblUltConexion.Visible = false;
-            }
-        }
-
         private void btnOpciones_Click(object sender, EventArgs e)
         {
             abrirFormulario(new frmOpciones());
@@ -183,5 +118,75 @@ namespace PryGestionDeInventario
         {
             System.Diagnostics.Process.Start("https://github.com/Mayder1014");
         }
+        #endregion
+
+        #region Metodos
+        public void ocultarSubMenu()
+        {
+            if (panelSubMenu.Visible == true)
+            {
+                panelSubMenu.Visible = false;
+            }
+        }
+
+        public void mostrarSubMenu(Panel subMenu)
+        {
+            if (subMenu.Visible == false)
+            {
+                ocultarSubMenu();
+                subMenu.Visible = true;
+            }
+            else
+            {
+                subMenu.Visible = false;
+            }
+        }
+
+        private Form formActivo = null;
+        private void abrirFormulario(Form formulario)
+        {
+            if (formActivo != null) //Si exite un formulario activo, se cierra
+            {
+                formActivo.Close();
+            }
+            formActivo = formulario; //Se almacena el formulario activo
+            formulario.TopLevel = false; //Indica que el formulario no es de nivel superior
+            formulario.FormBorderStyle = FormBorderStyle.None;
+            formulario.Dock = DockStyle.Fill;
+            panelFormularios.Controls.Add(formulario);
+            panelFormularios.Tag = formulario; //Asocia el form con el panel "contenedor"
+            formulario.BringToFront();
+            formulario.Show();
+        }
+
+        public bool permisoDeUsuario()
+        {
+            bool resultado = false;
+
+            if (logueado != false)
+            {
+                resultado = true;
+            }
+            else
+            {
+                MessageBox.Show("Ahora mismo se encuentra como Invitado. Debe loguearse para tener acceso a esta sección", "ACCESO DENEGADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return resultado;
+        }
+        
+        public void mostrarEstadoUsuario()
+        {
+            if (clsUsuario.usuarioActual != null)
+            {
+                lblEstadoUsuario.Text = clsUsuario.usuarioActual.usuario; lblUltConexion.Visible = true; 
+                lblUltConexion.Text = $"Última conexión registrada: \r\n{clsUsuario.usuarioActual.ultConexion.ToString()}";
+            }
+            else
+            {
+                lblEstadoUsuario.Text = "Invitado"; lblUltConexion.Visible = false;
+            }
+        }
+        #endregion 
     }
 }

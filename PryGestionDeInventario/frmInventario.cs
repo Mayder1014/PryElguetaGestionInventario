@@ -34,24 +34,11 @@ namespace PryGestionDeInventario
             conexion.obtenerDatos(dgvProductos);
             conexion.cargarLista(lstProductos);
 
+            //Al ser que en la condición de habilitarBoton se necesita que tanto el cmb como el upd tengan un valor valido, se setea el indice del cmb en un valor valido
             cmbIngresar.SelectedIndex = 1; habilitarBoton();
         }
 
-        public void llenarCombo(ComboBox cmb)
-        {
-            cmb.Items.Clear();
-            string[] categorias = new string[] { "Electronicos", "Alimentos", "Bazar/Librería", "Limpieza", "Perfumes" };
-
-            foreach (string cat in categorias)
-            {
-                cmb.Items.Add(cat);
-            }
-        }
-
-        private void btnVolver_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #region Eventos
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
@@ -94,26 +81,6 @@ namespace PryGestionDeInventario
             conexion.obtenerDatos(dgvProductos);
         }
 
-        public void agregarColumnas()
-        {
-            dgvProductos.DataSource = null; string[] columnas = new string[] { "Codigo", "Nombre", "Descripcion", "Precio", "Stock", "Categoria" };
-            foreach (string col in columnas)
-            {
-                dgvProductos.Columns.Add(col, col);
-            }
-        }
-
-        public void habilitarBoton()
-        {
-            if (cmbIngresar.SelectedIndex != -1 && updIngresar.Value != 0)
-            {
-                btnFiltrar.Enabled = true;
-            } else
-            {
-                btnFiltrar.Enabled = false;
-            }
-        }
-
         private void optFiltrarCategoria_CheckedChanged(object sender, EventArgs e)
         {
             cmbIngresar.Visible = true; updIngresar.Visible = false;
@@ -142,5 +109,48 @@ namespace PryGestionDeInventario
         {
             habilitarBoton();
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
+
+        #region Metodos
+
+        public void llenarCombo(ComboBox cmb)
+        {
+            cmb.Items.Clear();
+            string[] categorias = new string[] { "Electronicos", "Alimentos", "Bazar/Librería", "Limpieza", "Perfumes" };
+
+            foreach (string cat in categorias)
+            {
+                cmb.Items.Add(cat);
+            }
+        }
+
+        public void agregarColumnas()
+        {
+            dgvProductos.DataSource = null; string[] columnas = new string[] { "Codigo", "Nombre", "Descripcion", "Precio", "Stock", "Categoria" };
+            foreach (string col in columnas)
+            {
+                dgvProductos.Columns.Add(col, col);
+            }
+        }
+
+        public void habilitarBoton()
+        {
+            if (cmbIngresar.SelectedIndex != -1 && updIngresar.Value != 0)
+            {
+                btnFiltrar.Enabled = true;
+            }
+            else
+            {
+                btnFiltrar.Enabled = false;
+            }
+        }
+
+        #endregion
     }
 }
